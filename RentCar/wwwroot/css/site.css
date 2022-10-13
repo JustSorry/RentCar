@@ -1,0 +1,77 @@
+html {
+    font-size: 14px;
+    background-color: #424242
+}
+
+ul.navbar-nav {
+    font-family: Comic Sans MS;
+    display: flex;
+    list-style-type: none;
+}
+
+a.navbar-brand{
+    font-family:'Comic Sans MS';
+    margin-left:35px;
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 45px;
+}
+
+ul.navbar-nav li a {
+    text-decoration: none;
+    /*list-style-type: none;*/
+}
+
+a.nav-link:link {
+    color: limegreen;
+}
+
+a.nav-link:visited {
+    color: black;
+    text-decoration: underline;
+}
+
+a.nav-link:hover {
+    color: limegreen;
+    text-decoration: underline;
+}
+
+a.navbar-brand:link{
+    color: limegreen;
+    text-decoration: none;
+}
+
+a.navbar-brand:visited {
+    color: black;
+    text-decoration: underline;
+}
+
+a.navbar-brand:hover {
+    color: limegreen;
+    text-decoration: underline;
+}
+
+div.actual-date{
+    font-family:Calibri;
+}
+
+header{
+    background-color: darkgray;
+    border-style: solid;
+    
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}

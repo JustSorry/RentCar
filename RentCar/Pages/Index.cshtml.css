@@ -1,0 +1,32 @@
+﻿
+
+
+h1{
+    text-align: center;
+    color: limegreen;
+}
+
+h2{                                                             
+    text-align: center;
+    color: limegreen
+}
+
+.home-page{
+    font-family: Calibri;
+}
+
+int-cat-ref{
+    color: black;
+}
+
+/*a.ind-cat-ref:link{*/                                                         /*Colors for any links*/
+    /*color: limegreen;
+}*/
+
+/*a.ind-cat-ref:visited {
+    color: gray;
+}*/
+
+/*a.ind-cat-ref:hover {
+    color: black;
+}*/
