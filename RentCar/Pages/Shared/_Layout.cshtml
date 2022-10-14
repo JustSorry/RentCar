@@ -50,7 +50,7 @@
         </div>
         <nav class="navbar">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">RentCar</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index"><img src="~/Images/RentCarLogo.png" width="45" height="45" >RentCar</a>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav">
                         <li class="index-nav-item">
@@ -59,12 +59,23 @@
                         <li class="catalog-nav-item">
                             <a class="nav-link" asp-area="" asp-page="/Catalog">Catalog</a>
                         </li>
-                        <li class="sign-in-nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/Sign-in">Sign in</a>
-                        </li>
-                        <li class="reg-nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/Reg">Registration</a>
-                        </li>
+                        @{bool isLogged = false;
+                        if(isLogged)
+                        {
+                                <li class="My account">
+                                    <a class="nav-link" asp-area="" asp-page="/My-account">My account</a>
+                                </li>
+                        }
+                        else
+                        {
+                                <li class="sign-in-nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Sign-in">Sign in</a>
+                                </li>
+                                <li class="reg-nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Reg">Registration</a>
+                                </li>
+                        }
+                        }
                     </ul>
                 </div>
             </div>

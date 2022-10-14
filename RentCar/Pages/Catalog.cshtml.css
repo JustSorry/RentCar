@@ -1,1 +1,34 @@
-﻿
+﻿h2{
+    font-family: Comic Sans MS;
+    color:limegreen;
+    margin-left: 30px;
+}
+
+.filter-ref{
+    font-family: 'Comic Sans MS';
+    color: white;
+    text-decoration: none;
+}
+
+ul.car-body-filter, ul.price-filter {
+    display: flex;
+    list-style-type: none;
+}
+
+ul.car-body-filter li p, ul.price-filter li p {
+    font-family: Comic Sans MS;
+    color: limegreen;
+    width: 200px;
+    list-style-type: none;
+    /*padding:200px;*/
+}
+
+ul.car-body-filter li a, ul.price-filter li a {
+    width: 200px;
+    text-decoration: underline;
+    padding:30px;
+    list-style-type:none;
+    
+}
+
+

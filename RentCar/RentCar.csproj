@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\Images\hatchback3d.png\**" />
+    <Content Remove="wwwroot\Images\hatchback3d.png\**" />
+    <EmbeddedResource Remove="wwwroot\Images\hatchback3d.png\**" />
+    <None Remove="wwwroot\Images\hatchback3d.png\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Fonts\" />
   </ItemGroup>
 

@@ -5,18 +5,50 @@
 }
 <h1>@ViewData["Catalog"]</h1>
 <h2>This is catalog. Let's choose the best option for you</h2><br>
-<div>
-    <p> <strong> Price filter: </strong> </p>
-    <a href="">Econom class</a><br>
-    <a href="">Middle class</a><br>
-    <a href="">Premium class</a><br><br>
-    <p> <strong>Car body type filter: </strong></p>
-    <a href="">Hatchbacks</a><br>
-    <a href="">Sedans</a> <br>
-    <a href="">Universals</a> <br>
-    <a href="">Pick-up's</a> <br>
-    <a href="">Trucks</a> <br>
-    <a href="">Vans</a> <br>
+<div class="div-filters">
+    <ul class="price-filter">
+        <li>
+            <p class="filter"> <strong>Price filter: </strong> </p> <br>
+        </li>
+        <li>
+            <a class="filter-ref" href=""><img src="~/Images/econom-car.png" width="30" height="30"/>Econom class</a><br>
+        </li>
+        <li>
+            <a class="filter-ref" href=""><img src="~/Images/middle-car.png" width="30" height="30">Middle class</a><br>
+        </li>
+        <li>
+            <a class="filter-ref" href=""><img src="~/Images/premium-car.png" width="30" height="30">Premium class</a><br>
+        </li>
+    </ul>
+    <ul class="car-body-filter">
+        <li>
+            <p class="filter"> <strong>Car body type filter: </strong></p> <br>
+        </li>
+        <li>
+            <a class="filter-ref" href=""><img src="~/Images/hatchback3d.png" width="30" height="30">Hatchback</a><br>
+        </li>
+        <li>
+            <a class="filter-ref" href=""><img src="~/Images/sport-car3d.png" width="30" height="30">Sportcar</a><br><br>
+        </li>
+        <li>
+            <a class="filter-ref" href=""><img src="~/Images/minivan3d.png" width="30" height="30">Minivan</a> <br>
+        </li>
+        <li>
+            <a class="filter-ref" href=""><img src="~/Images/cabriolet3d.png" width="30" height="30">Cabriolet</a> <br>
+        </li>
+        <li>
+            <a class="filter-ref" href=""><img src="~/Images/crossover3d.png" width="30" height="30">Crossover</a> <br>
+        </li>
+        <li>
+            <a class="filter-ref" href=""><img src="~/Images/pick-up3d.png" width="30" height="30">Pick-up</a> <br>
+        </li>
+        <li>
+            <a class="filter-ref" href=""><img src="~/Images/truck3d.png" width="30" height="30">Truck</a> <br>
+        </li>
+        <li>
+            <a class="filter-ref" href=""><img src="~/Images/van3d.png" width="30" height="30">Van</a> <br>
+        </li>
+    </ul>
 </div>
 <style>
     

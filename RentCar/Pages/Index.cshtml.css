@@ -15,8 +15,17 @@ h2{
     font-family: Calibri;
 }
 
-int-cat-ref{
+h2.ind-cat-ref:visited{
     color: black;
+}
+
+h2.ind-cat-ref.:link{
+    color: limegreen;
+}
+
+h2.ind-cat-ref:hover{
+    color:black;
+    text-decoration: underline;
 }
 
 /*a.ind-cat-ref:link{*/                                                         /*Colors for any links*/
