@@ -1,0 +1,16 @@
+﻿@page
+@model RentCar.Pages.CarSelectModel
+@{
+	ViewData["Title"] = "Car select page";
+}
+
+<h1 class="h1CSP">Car select page </h1>
+<ul>
+	@{foreach (Car car in Car)
+	{
+		if(car.CarBody == carBody)
+		{
+			<li>/*CARDATA*/</li>
+		}
+	}}
+</ul>
