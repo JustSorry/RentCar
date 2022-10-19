@@ -4,7 +4,7 @@ using RentCar.Models;
 
 namespace RentCar.Pages
 {
-    public class CarSelectAfterFiltersModel : PageModel
+    public class CarSelectModel : PageModel
     {
         public void OnGet()
         {
