@@ -1,16 +1,21 @@
 ﻿@page
+@using Models
 @model RentCar.Pages.CarSelectModel
 @{
 	ViewData["Title"] = "Car select page";
 }
 
-<h1 class="h1CSP">Car select page </h1>
-<ul>
-	@*@{foreach (Car car in Car)
+<h1 >Car select page </h1>
+<ul class="res_pan">
+	@foreach (Car car in Model.ResCars)
 	{
-		if(car.CarBody == carBody)
-		{
-			<li>/*CARDATA*/</li>
-		}
-	}}*@
+		<li>
+			<div class="res_car">
+				<a href="/CarPage?CarBody=@car.CarBody"> <img class="car-img" alt="image coming s00n"/> </a>
+				<div>
+					<a class="title" href="/CarPage?CarBody=@car.CarBody">@car.Brand @car.Model @car.YearOfProd</a><br>
+				</div>
+			</div>
+		</li>
+	}
 </ul>

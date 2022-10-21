@@ -2,6 +2,7 @@ using RentCar.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+string bodySelect;
 
 string connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -29,6 +30,7 @@ app.MapRazorPages();
 
 using(ApplicationContext db = new ApplicationContext())
 {
+    db.Database.EnsureDeleted();
     db.Database.EnsureCreated();
 
     Car mitsPaj= new Car { Brand = "Mitsubishi", Model = "Pajero IV", CarBody = "Crossover", YearOfProd = 2008, DriveType = "4x4", CountryOfProd = "Japan", TypeOfEngine = "Diesel", EngineV = 3.2, TypeOfGearbox = "Mechanical", Milleage = 264000, DayPrice = 100.0, WeekPrice = 500.0 };

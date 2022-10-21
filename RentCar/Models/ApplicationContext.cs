@@ -8,6 +8,7 @@ namespace RentCar.Models
         public DbSet<Car> Cars { get; set; } = null!;
         public ApplicationContext()
         {
+            
             Database.EnsureCreated();   // creating database in first launch
         }
 
