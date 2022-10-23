@@ -1,0 +1,13 @@
+﻿@page
+@model RentCar.Pages.MyAccountModel
+@{
+    ViewData["Title"] = "My account";
+}
+
+<html>
+    <body>
+        <h1 class="hello-user">Hello @User.Identity.Name</h1>
+        <p class="money">Your money = </p>
+        <a href="/Accounts/Logout">Logout</a>
+    </body>
+</html>

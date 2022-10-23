@@ -1,0 +1,22 @@
+﻿@page
+@model RentCar.Pages.Accounts.SignInModel
+@{
+    ViewData["Title"] = "Signing in";
+}
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div>
+        <label asp-for="model.Username"></label><br />
+        <input asp-for="model.Username" />
+        <span asp-validation-for="model.Username"></span>
+    </div>
+    <div>
+        <label asp-for="model.Password"></label><br />
+        <input asp-for="model.Password" />
+        <span asp-validation-for="model.Password"></span>
+    </div>
+    <div>
+        <input type="submit" value="Sign in" />
+    </div>
+</form>

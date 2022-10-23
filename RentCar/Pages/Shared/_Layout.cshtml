@@ -58,22 +58,20 @@
                         <li class="catalog-nav-item">
                             <a class="nav-link" asp-area="" asp-page="/Catalog">Catalog</a>
                         </li>
-                        @{bool isLogged = false;
-                        if(isLogged)
+                        @if (User.Identity.IsAuthenticated)
                         {
-                                <li class="My account">
-                                    <a class="nav-link" asp-area="" asp-page="/My-account">My account</a>
-                                </li>
+                            <li class="My account">
+                                <a class="nav-link" href="/Accounts/MyAccount?nickname=@User">My account</a>
+                            </li>
                         }
                         else
                         {
-                                <li class="sign-in-nav-item">
-                                    <a class="nav-link" asp-area="" asp-page="/Sign-in">Sign in</a>
-                                </li>
-                                <li class="reg-nav-item">
-                                    <a class="nav-link" asp-area="" asp-page="/Reg">Registration</a>
-                                </li>
-                        }
+                            <li class="sign-in-nav-item">
+                                <a class="nav-link" asp-page="/Accounts/Sign-in">Sign in</a>
+                            </li>
+                            <li class="reg-nav-item">
+                                <a class="nav-link" asp-page="/Accounts/Reg">Registration</a>
+                            </li>
                         }
                     </ul>
                 </div>

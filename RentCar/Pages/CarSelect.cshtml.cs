@@ -10,9 +10,9 @@ namespace RentCar.Pages
         public Car[] ResCars = new Car[0];
         public new string? Request;
 
-        public void OnGet(string? CarBody, string? CountryOfProd)
+        public void OnGet(string? req)
         {
-            Request = CarBody == "allBodies" ? CountryOfProd : (CountryOfProd == "allCountries" ? CarBody : CountryOfProd);
+            Request = req;
             using (ApplicationContext db = new ApplicationContext())
             {
                 Car[] carArray = db.Cars.ToArray();
@@ -24,7 +24,9 @@ namespace RentCar.Pages
         {
             bool isFinded =
                 (car.CarBody?.Contains(searchingCar) ?? false) ||
-                (car.CountryOfProd?.Contains(searchingCar) ?? false);
+                (car.CountryOfProd?.Contains(searchingCar) ?? false) ||
+                (car.TypeOfGearbox?.Contains(searchingCar) ?? false) ||
+                (car.DriveType?.Contains(searchingCar) ?? false);
             return isFinded;
         }
     }

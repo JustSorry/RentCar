@@ -10,22 +10,22 @@
     text-decoration: none;
 }
 
-ul.car-body-filter, ul.country-prod-filter {
+ul.car-body-filter, ul.country-prod-filter, ul.transmission-filter, ul.drive-type-filter {
     display: flex;
     list-style-type: none;
 }
 
-    ul.car-body-filter li p, ul.country-prod-filter li p {
-        font-family: Comic Sans MS;
-        color: limegreen;
-        width: 200px;
-        list-style-type: none;
-        /*padding:200px;*/
-    }
+ul.car-body-filter li p, ul.country-prod-filter li p, ul.transmission-filter li p, ul.drive-type-filter li p {
+    font-family: Comic Sans MS;
+    color: limegreen;
+    width: 200px;
+    list-style-type: none;
+    /*padding:200px;*/
+}
 
-    ul.car-body-filter li a, ul.country-prod-filter li a {
-        width: 200px;
-        text-decoration: underline;
-        padding: 30px;
-        list-style-type: none;
-    }
+ul.car-body-filter li a, ul.country-prod-filter li a, ul.transmission-filter li a, ul.drive-type-filter li a {
+    width: 200px;
+    text-decoration: underline;
+    padding: 30px;
+    list-style-type: none;
+}

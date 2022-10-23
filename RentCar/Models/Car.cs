@@ -1,15 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
-
-namespace RentCar.Models
-{
-    [Microsoft.EntityFrameworkCore.Index("CarBody", Name = "CarBody_Index")]
+namespace RentCar.Models;
+    
     public class Car
     {
-        [Required][Key]
-        public int CarId { get; set; }
+        public int Id { get; set; }
         public string? Brand { get; set; } 
         public string? Model { get; set; } 
         public string? CarBody { get; set; }
@@ -22,7 +16,5 @@ namespace RentCar.Models
         public int? Milleage { get; set; }
         public double? DayPrice { get; set; }
         public double? WeekPrice { get; set; } 
+        public string? ImgPath { get; set; }
     }
-
-
-}
