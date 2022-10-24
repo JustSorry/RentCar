@@ -1,0 +1,22 @@
+﻿h1, h2{
+    font-family: 'Comic Sans MS';
+    color: limegreen;
+    margin-left: 30px;
+}
+
+ul.prices-table li p, ul.specifications-table li p {
+    font-family: 'Comic Sans MS';
+    color: white;
+}
+
+ul.prices-table, .specifications-table {
+    list-style-type: none;
+}
+
+
+img.car-img{
+    margin-right: 30px;
+    float: right;
+    width: 1000px;
+    height: 500px;
+}

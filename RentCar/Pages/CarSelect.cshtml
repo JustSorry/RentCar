@@ -6,14 +6,14 @@
 }
 
 <h2 >Car select page </h2>
-<ul class="res_pan">
+<ul class="res-pan">
 	@foreach (Car car in Model.ResCars)
 	{
 		<li>
-			<div class="res_car">
-				<a href="/CarPage?CarBody=@car.CarBody"> <img class="car-img" src="@car.ImgPath" alt="image coming s00n"/> </a>
+			<div class="res-car">
+				<a href="/CarPage?Id=@car.Id"> <img class="car-img" src="@car.ImgPath" alt="image coming s00n"/> </a>
 				<div>
-					<a class="title" href="/CarPage?CarBody=@car.CarBody">@car.Brand @car.Model @car.YearOfProd</a><br>
+					<a class="car-title" href="/CarPage?Id=@car.Id"><strong>@car.Brand @car.Model @car.YearOfProd</strong></a><br>
 				</div>
 			</div>
 		</li>

@@ -13,6 +13,7 @@
 ul.car-body-filter, ul.country-prod-filter, ul.transmission-filter, ul.drive-type-filter {
     display: flex;
     list-style-type: none;
+    align-items: center;
 }
 
 ul.car-body-filter li p, ul.country-prod-filter li p, ul.transmission-filter li p, ul.drive-type-filter li p {
@@ -28,4 +29,26 @@ ul.car-body-filter li a, ul.country-prod-filter li a, ul.transmission-filter li 
     text-decoration: underline;
     padding: 30px;
     list-style-type: none;
+}
+
+ul.country-prod-filter, ul.car-body-filter, ul.drive-type-filter, ul.transmission-filter{
+    animation-duration: 1.5s;
+    animation-name: slidein;
+}
+
+/*img.filter-img {
+    animation-duration: 3s;
+    animation-name: slidein;
+}*/
+
+@keyframes slidein {
+    from {
+        margin-left: 100%;
+        width: 300%;
+    }
+
+    to {
+        margin-left: 0%;
+        width: 100%;
+    }
 }

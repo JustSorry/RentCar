@@ -2,6 +2,10 @@
     background-color: limegreen;
 }
 
+span.date-today{
+    color: black;
+}
+
  span.word-today, span.clock-dat{
      color: limegreen;
  }
@@ -16,11 +20,11 @@ a {
    color: #0a0a0a;
 }
 
-.btn-primary {
+/*.btn-primary {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
-}
+}*/
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
@@ -40,10 +44,10 @@ a {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
-button.accept-policy {
+/*button.accept-policy {
   font-size: 1rem;
   line-height: inherit;
-}
+}*/
 
 /*.footer {
   position: absolute;

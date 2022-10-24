@@ -6,3 +6,25 @@ h2 {
     color: limegreen;
     margin-left: 30px;
 }
+
+img.car-img{
+    width: 700px;
+    height: 350px;
+}
+
+ul.res-pan{
+    display: flex;
+    list-style-type: none;
+}
+
+ul.res-pan li a{
+    color:limegreen;
+    text-decoration:none;
+    font-family: Calibri;
+}
+
+ul.res-pan li a:hover {
+    color: white;
+    text-decoration: underline;
+    font-family: Calibri;
+}

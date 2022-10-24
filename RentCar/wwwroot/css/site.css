@@ -1,6 +1,9 @@
 html {
     font-size: 14px;
-    background-color: #424242
+    /*background-color: #424242;*/
+    position: relative;
+    min-height: 100%;
+    background-image: url("../Images/testbg3.jpg")
 }
 
 ul.navbar-nav {
@@ -20,6 +23,7 @@ a.navbar-brand{
 ul.navbar-nav li a {
     text-decoration: none;
     margin-left: 30px;
+
     /*list-style-type: none;*/
 }
 
@@ -52,20 +56,14 @@ div.actual-date{
 }
 
 header{
-    background-color: darkgray;
+    background-color: gray;
     border-style: solid;
-    
 }
 
 @media (min-width: 768px) {
   html {
     font-size: 16px;
   }
-}
-
-html {
-  position: relative;
-  min-height: 100%;
 }
 
 body {

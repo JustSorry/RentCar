@@ -6,6 +6,27 @@ namespace RentCar.Pages
 {
     public class CarPageModel : PageModel
     {
+        public Car takedCar = null;
+        public void OnGet(int Id)
+        { 
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Car[] allCars = db.Cars.ToArray();
+                takedCar = findCar(allCars, Id);
+            }
+        }
+
+        private Car findCar(Car[] cars, int id)
+        {
+            Car specificCar = null;
+            foreach (Car car in cars)
+            {
+                if (car.Id == id) specificCar = car;
+                if (takedCar != null) break;
+            }
+            return specificCar;
+        }
+
         //public Car takedCar = null;
         //public void OnGet()
         //{

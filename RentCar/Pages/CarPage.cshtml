@@ -3,5 +3,54 @@
 @{
 	ViewData["Title"] = "Car page";
 }
+@{string countryLower = (Model.takedCar.CountryOfProd).ToLower();}
+
+<html>
+	<body>
+	<h1>@Model.takedCar.Brand @Model.takedCar.Model @Model.takedCar.YearOfProd<img class="car-img" src="@Model.takedCar.ImgPath" /></h1>
+		<h2>@Model.takedCar.CountryOfProd <img src="~/Images/@countryLower-flag.png" width="15" height="15" /></h2>
+		<ul class="prices-table">
+			<li>
+				<h2><strong>Prices:</strong></h2>
+			</li>
+			<li>
+				<p><strong>Day Price =</strong> $@Model.takedCar.DayPrice</p>
+			</li>
+			<li>
+				<p><strong>Week Price =</strong> $@Model.takedCar.WeekPrice</p>
+			</li>
+		</ul>
+		
+		<ul class="specifications-table">
+			<li>
+				<h2><strong>Specifications:</strong></h2>
+			</li>
+			<li>
+				<p><strong>Car body -</strong> @Model.takedCar.CarBody</p>
+			</li>
+			<li>
+				<p><strong>Year of production -</strong> @Model.takedCar.YearOfProd</p>
+			</li>
+			<li>
+				<p><strong>Country of prod -</strong> @Model.takedCar.CountryOfProd</p>
+			</li>
+			<li>
+				<p><strong>Drive type -</strong> @Model.takedCar.DriveType</p>
+			</li>
+			<li>
+				<p><strong>Engine type (type of fuel) -</strong> @Model.takedCar.TypeOfEngine</p>
+			</li>
+			<li>
+				<p><strong>Engine size(capacity) -</strong> @Model.takedCar.EngineV</p>
+			</li>
+			<li>
+				<p><strong>Transmission -</strong> @Model.takedCar.TypeOfGearbox</p>
+			</li>
+			<li>
+				<p><strong>Milleage -</strong> @Model.takedCar.Milleage km</p>
+			</li>
+		</ul>
+	</body>
+</html>
 
 
