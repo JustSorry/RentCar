@@ -34,11 +34,6 @@ namespace RentCar.Pages.Accounts
             _signInManager = signInManager;
         }
 
-        public void OnGet()
-        {
-
-        }
-
         private async Task<IActionResult> Login()
         {
             if (ModelState.IsValid)

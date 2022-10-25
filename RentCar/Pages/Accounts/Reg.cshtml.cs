@@ -44,7 +44,7 @@ namespace RentCar.Pages.Accounts
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email, UserName = model.Username};
+                User user = new User { Email = model.Email, UserName = model.Username, Money = 10000000000};
 
                 var result = await _userManager.CreateAsync(user, model.Password);
 
