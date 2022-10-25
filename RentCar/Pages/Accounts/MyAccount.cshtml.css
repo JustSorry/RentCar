@@ -1,0 +1,29 @@
+﻿h1.hello-user, p.money{
+    font-family: 'Comic Sans MS';
+    color: limegreen;
+    
+}
+
+h1.hello-user {
+    font-size: 80px;
+    margin-left: 30px;
+}
+
+    h1.hello-user, p.money{
+        margin: auto;
+    }
+
+    ul.my-account-menu {
+        list-style-type: none;
+        font-family: 'Comic Sans MS';
+    }
+
+ul.my-account-menu li a {
+    text-decoration: none;
+    color: limegreen;
+}
+
+a.give-role-button{
+    margin-top:auto;
+    max-height: 500px;
+}

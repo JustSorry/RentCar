@@ -6,8 +6,23 @@
 
 <html>
     <body>
-        <h1 class="hello-user">Hello @User.Identity.Name</h1>
-        <p class="money">Your money =$@Model.CurrentUser.Money</p>
-        <a href="/Accounts/Logout">Logout</a>
-    </body>
-</html>
+        <h1 class="hello-user"><strong>Hello @User.Identity.Name</strong></h1>
+        <p class="money">Your money =$@Model.CurrentUser.Money (WOW)</p>
+        <ul class="my-account-menu">
+            <li>
+                @if (User.IsInRole("moderator"))
+                {
+                    <a class="give-role-button" href="/Moderator/GiveRole">Change user roles</a><br />
+                }
+                @if ((User.IsInRole("moderator")) || (User.IsInRole("admin")))
+                {
+                    <a class="add-car-ref" href="/Admin/AddCar">Add car</a><br />
+                    <a class="delete-car-ref" href="/Admin/DeleteCar">Delete car</a>
+                }
+            </li>
+            <li>
+               <a href="/Accounts/Logout">Logout</a>
+            </li>
+        </ul>
+        </body>
+    </html>

@@ -58,7 +58,6 @@ div.actual-date{
 header{
     background-color: gray;
     border-style: solid;
-}
 
 @media (min-width: 768px) {
   html {

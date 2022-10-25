@@ -3,9 +3,9 @@
 @{
     ViewData["Title"] = "Signing in";
 }
-
-<form class="sign-in-form" method="post">
-    <div asp-validation-summary="ModelOnly"></div>
+<div class="sign-in-menu">
+    <form method="post">
+        <div asp-validation-summary="ModelOnly"></div>
         <h1 class="sign-in">Sign in</h1>
         <div class="text-center">
             <label asp-for="model.Username"></label><br />
@@ -19,6 +19,9 @@
         </div>
         <div class="text-center">
             <br />
-            <input type="submit" value="Sign in" />
+            <input href="/Index" type="submit" value="Sign in" class="floating-button">
         </div>
-</form>
+        <br /><br />
+    </form>
+</div>
+

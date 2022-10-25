@@ -1,0 +1,17 @@
+﻿button.remove-admin-button{
+    background-color: red;
+}
+
+button.give-admin-button{
+    background-color: green;
+}
+
+div.users-form{
+    max-width: 2000px;
+    margin: auto;
+}
+
+p.p-user{
+    font-family: 'Comic Sans MS';
+    color: limegreen;
+}

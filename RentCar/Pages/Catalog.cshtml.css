@@ -4,6 +4,10 @@
     margin-left: 30px;
 }
 
+hr.catalog-hr{
+    color: limegreen;
+}
+
 .filter-ref {
     font-family: 'Comic Sans MS';
     color: white;
