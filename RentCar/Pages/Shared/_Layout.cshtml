@@ -61,7 +61,7 @@
                        
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="My account">
+                            <li class="my-account">
                                 <a class="nav-link" href="/Accounts/MyAccount?nickname=@User.Identity.Name">My account</a>
                             </li>
                         }
@@ -72,6 +72,12 @@
                             </li>
                             <li class="reg-nav-item">
                                 <a class="nav-link" asp-page="/Accounts/Reg">Registration</a>
+                            </li>
+                        }
+                        @if ((User.IsInRole("admin")) || (User.IsInRole("moderator")))
+                        {
+                            <li class="managment">
+                                <a class="nav-link" href="/Managment">Managment</a>
                             </li>
                         }
                     </ul>

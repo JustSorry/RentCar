@@ -8,7 +8,7 @@
 	<form>
 		@foreach (var user in Model.Users)
 		{
-		if (user.userRole.Contains("moderator")) continue;
+			if (user.userRole.Contains("moderator")) continue;
 			<p class="p-user">@user.currentUser.UserName (@user.currentUser.Email)</p>
 			@if (user.userRole.Contains("admin"))
 			{

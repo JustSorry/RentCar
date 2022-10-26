@@ -22,7 +22,7 @@ namespace RentCar.Pages
             foreach (Car car in cars)
             {
                 if (car.Id == id) specificCar = car;
-                if (takedCar != null) break;
+                if (specificCar != null) break;
             }
             return specificCar;
         }

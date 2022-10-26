@@ -1,0 +1,12 @@
+﻿@page
+@model RentCar.Pages.ManagmentModel
+@{
+}
+
+<div>
+	@if (User.IsInRole("moderator"))
+	{
+		<a class="give-role-button" href="/Moderator/GiveRole">Users managment</a><br />
+	}
+	<a class="delete-car-ref" href="/Admin/CarMng">Cars managment</a>
+</div>

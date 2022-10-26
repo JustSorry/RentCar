@@ -1,0 +1,19 @@
+﻿.table-header{
+    color:limegreen;
+}
+
+.table-row{
+    color:white;
+}
+
+table{
+    max-width: 1000px;
+    margin: auto;
+    width:1000px;
+}
+
+th, td{
+    text-align:center;
+    color:white;
+}
+

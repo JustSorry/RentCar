@@ -1,0 +1,34 @@
+﻿@page
+@model RentCar.Pages.Admin.CarMngModel
+@{
+	ViewData["Title"] = "Car managment menu";
+}
+
+<form>
+	<div class="cars-list">
+		<table>
+			<tr>
+				<th class="table-header">Car</th>
+				<th class="table-header">Year of producion</th>
+				<th class="table-header">Milleage</th>
+				<th class="table-header"></th>
+				<th class="table-header"></th>
+
+			</tr>
+			@foreach (var car in Model.allCars)
+			{
+				<tr>
+					<td class="a-table-row"> <a href="/CarPage?Id=@car.Id">@car.Brand	@car.Model</a> </td>
+					<td class="table-row">@car.YearOfProd</td>
+					<td class="table-row">@car.Milleage</td>
+				</tr>
+				
+			}
+		</table>
+	</div>
+	<div class="add-car-menu-button">
+		<a class="add-car-ref" href="/Admin/AddCar">Add car</a><br />
+	</div>
+</form>
+
+

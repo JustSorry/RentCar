@@ -12,6 +12,11 @@ img.car-img{
     height: 350px;
 }
 
+div.car-title a{
+    font-size:20px;
+    margin-left: 200px;
+}
+
 ul.res-pan{
     display: flex;
     list-style-type: none;
