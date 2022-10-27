@@ -5,19 +5,21 @@
 }
 
 <div class="div-users-form">
-	<form>
-		@foreach (var user in Model.Users)
-		{
-			if (user.userRole.Contains("moderator")) continue;
+	@foreach (var user in Model.Users)
+	{
+		@if (user.userRole.Contains("moderator")) continue;
+		<form method="post">
+			<input name="id" value="@user.currentUser.Id" hidden>
+			
 			<p class="p-user">@user.currentUser.UserName (@user.currentUser.Email)</p>
 			@if (user.userRole.Contains("admin"))
 			{
-				<button type="submit" name="admin-role-button" class="remove-admin-button" value="removeAdmin">Remove admin role</button>
+				<button type="submit" name="adminRoleBtn" class="remove-admin-button" value="removeAdmin">Remove admin role</button>
 			}
 			else 
 			{
-				<button type="submit" name="admin-role-button" class="give-admin-button" value="giveAdmin">Give admin role</button>
+				<button type="submit" name="adminRoleBtn" class="give-admin-button" value="giveAdmin">Give admin role</button>
 			}
-		}
-	</form>
+		</form>
+	}
 </div>

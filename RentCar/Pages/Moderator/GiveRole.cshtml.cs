@@ -38,10 +38,10 @@ namespace RentCar.Pages.Moderator
             this.userManager = userManager;
         }
 
-        public async Task<IActionResult> OnPost(string admin_button, string id)
+        public async Task<IActionResult> OnPost(string adminRoleBtn, string id)
         {
             User user = await userManager.FindByIdAsync(id);
-            switch (admin_button)
+            switch (adminRoleBtn)
             {
                 case "giveAdmin":
                     await userManager.AddToRoleAsync(user, "admin");
@@ -50,7 +50,7 @@ namespace RentCar.Pages.Moderator
                     await userManager.RemoveFromRoleAsync(user, "admin");
                     break;
             }
-            return RedirectToPage("/Moderator/GiveRoles");
+            return RedirectToPage("/Moderator/GiveRole");
 
         }
     }
