@@ -1,5 +1,4 @@
 ﻿@page
-@using Models
 @model RentCar.Pages.CarSelectModel
 @{
 	ViewData["Title"] = "Car select page";
@@ -7,7 +6,7 @@
 
 <h2 >Car select page </h2>
 <ul class="res-pan">
-	@foreach (Car car in Model.ResCars)
+	@foreach (var car in Model.ResCars)
 	{
 		<li>
 			<div class="res-car">

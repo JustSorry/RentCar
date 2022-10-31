@@ -7,13 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="wwwroot\Images\hatchback3d.png\**" />
-    <Content Remove="wwwroot\Images\hatchback3d.png\**" />
-    <EmbeddedResource Remove="wwwroot\Images\hatchback3d.png\**" />
-    <None Remove="wwwroot\Images\hatchback3d.png\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="Pages\StyleSheet.css" />
   </ItemGroup>
 
@@ -24,6 +17,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BAL\BAL.csproj" />
+    <ProjectReference Include="..\DAL\DAL.csproj" />
   </ItemGroup>
 
   <ItemGroup>

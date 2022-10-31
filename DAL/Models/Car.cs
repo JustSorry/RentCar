@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-namespace RentCar.DAL.Models;
+﻿namespace DAL.Models;
     
     public class Car
     {

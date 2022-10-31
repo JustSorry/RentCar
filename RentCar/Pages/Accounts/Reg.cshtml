@@ -3,8 +3,33 @@
 	@{ViewData["Title"] = "Registration"; 
 }
 
-<h2>Registration</h2>
-<form class="reg-form" method="post" asp-controller="Account" asp-action="Register">
+
+<form method="post">
+    <div class="reg-menu">
+        <h1 class="reg-title">Registration</h1>
+        <div class="text-center">
+            <label>Username</label><br />
+            <input class="user-inp" name="username" value="@Model.Username" />
+        </div>
+        <div class="text-center">
+            <label>Email</label><br />
+            <input class="user-inp" name="email" value="@Model.Email" />
+        </div>
+        <div class="text-center">
+            <label>Password</label><br />
+            <input class="user-inp" type="password" name="password" />
+        </div>
+        <div class="text-center">
+            <label>Confirm your password</label><br />
+            <input class="user-inp" type="password" name="passwordConfirm" />
+        </div>
+        <div class="text-center">
+            <br />
+            <input href="/Index" type="submit" value="Registration" class="floating-button">
+        </div>
+    </div>
+</form>
+@*<form class="reg-form" method="post" asp-controller="Account" asp-action="Register">
     <div asp-validation-summary="ModelOnly"></div>
     <div>
         <label asp-for="model.Username"></label><br />
@@ -29,5 +54,5 @@
     <div>
         <input type="submit" value="Submit"/>
     </div>
-</form>
+</form>*@
 

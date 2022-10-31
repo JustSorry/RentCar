@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RentCar.Models;
+using DAL.Models;
+using DAL.Data;
 
 namespace RentCar.Pages.Admin
 {
@@ -10,12 +11,6 @@ namespace RentCar.Pages.Admin
     { 
         public Car[] allCars = new Car[0];
         private Car currentCar;
-        
-        public static void DeleteFile(string file)
-        {
-            //if (File.Exists("wwwroot" + file))
-            //    File.Delete("wwwroot" + file);
-        }
 
         public void OnGet(int id)
         {
@@ -33,32 +28,26 @@ namespace RentCar.Pages.Admin
             }
         }
 
-        public async Task<IActionResult> OnPostAsync(bool delBtnPushed/*, bool editBtnPushed*/)
-        {
-            //if (!deleteCarButton) return RedirectToPage("/Index");
-            if(delBtnPushed)
-            {
-                using (ApplicationContext db = new ApplicationContext())
-                {
-                    //DeleteFile(car.ImgPath);
-                }
-                return Page();
-            }
-            //if(editBtnPushed)
-            //{
-            //    using (ApplicationContext db = new ApplicationContext())
-            //    {
-
-            //    }
-            //    return 
-            //}
-
-
-
-
-
-            return Page();
+        //public async Task<IActionResult> OnPostAsync(bool delBtnPushed/*, bool editBtnPushed*/)
+        //{
+        //    //if (!deleteCarButton) return RedirectToPage("/Index");
+        //    if(delBtnPushed)
+        //    {
+        //        using (ApplicationContext db = new ApplicationContext())
+        //        {
+        //            //DeleteFile(car.ImgPath);
+        //        }
+        //        return Page();
+        //    }
+        //    //if(editBtnPushed)
+        //    //{
+        //    //    using (ApplicationContext db = new ApplicationContext())
+        //    //    {
+        //    //    }
+        //    //    return 
+        //    //}
+        //    return Page();
             
-        }
+        //}
     }
 }

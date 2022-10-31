@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj" />
-    <ProjectReference Include="..\RentCar\RentCar.csproj" />
   </ItemGroup>
 
   <ItemGroup>

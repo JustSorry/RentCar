@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RentCar.Models;
+using DAL.Models;
+using DAL.Data;
 using System.Reflection.Metadata.Ecma335;
+using DAL.Repositories;
+using BAL.Services;
 
 namespace RentCar.Pages
 {
@@ -9,6 +12,7 @@ namespace RentCar.Pages
     {
         public Car[] ResCars = new Car[0];
         public new string? Request;
+        CarService carService = new CarService();
 
         public void OnGet(string? req)
         {
@@ -16,18 +20,8 @@ namespace RentCar.Pages
             using (ApplicationContext db = new ApplicationContext())
             {
                 Car[] carArray = db.Cars.ToArray();
-                ResCars = (from car in carArray where FilterCar(car, Request ?? "") select car).ToArray();
+                ResCars = (from car in carArray where carService.CheckCar(Request ?? "", car) select car).ToArray();
             }
-        }
-
-        private bool FilterCar(Car car, string searchingCar)
-        {
-            bool isFinded =
-                (car.CarBody?.Contains(searchingCar) ?? false) ||
-                (car.CountryOfProd?.Contains(searchingCar) ?? false) ||
-                (car.TypeOfGearbox?.Contains(searchingCar) ?? false) ||
-                (car.DriveType?.Contains(searchingCar) ?? false);
-            return isFinded;
         }
     }
 }

@@ -6,7 +6,5 @@ using System.Threading.Tasks;
 
 namespace BAL.Services
 {
-	internal class FIleServices
-	{
-	}
+    public class ActionResult<T> where T : class { public T? Value { get; set; } }
 }

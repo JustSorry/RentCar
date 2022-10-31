@@ -1,7 +1,7 @@
 ﻿@page
 @model RentCar.Pages.CarPageModel
 @{
-	ViewData["Title"] = "Car page";
+	ViewData["Title"] = $"{Model.takedCar.Brand} {Model.takedCar.Model}";
 }
 @{string countryLower = (Model.takedCar.CountryOfProd).ToLower();}
 
@@ -51,7 +51,9 @@
 				<p><strong>Milleage -</strong> @Model.takedCar.Milleage km</p>
 			</li>
 		</ul>
-		@if (User.IsInRole("admin") || User.IsInRole("moderator")) {<a href="/Admin/EditCar?id=@Model.takedCar.Id">Edit car</a>}
+		@if (User.IsInRole("admin") || User.IsInRole("moderator")) {<a class="edit-car-button" href="/Admin/EditCar?id=@Model.takedCar.Id">Edit car</a>}
+		<button>Rentfor a day</button>
+		<button>Rent for a week</button>
 	</body>
 </html>
 

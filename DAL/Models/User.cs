@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace RentCar.DAL.Models
+namespace DAL.Models
 {
     public class User : IdentityUser
     {

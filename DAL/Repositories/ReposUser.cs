@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RentCar.DAL.Models;
-using DAL.Contracts;
-using Microsoft.AspNetCore.Mvc;
+using DAL.Models;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using DAL.Contracts;
 
 namespace DAL.Repositories
 {
@@ -22,38 +23,36 @@ namespace DAL.Repositories
             _userManager = userManager;
         }
 
-        async Task<IdentityResult> IReposUser<User>.Create(User user, string password)
+        public async Task<IdentityResult> Create(User user, string password)
         {
             return await _userManager.CreateAsync(user, password);
         }
 
-        void IReposUser<User>.Delete(User user)
+        public void Delete(User user)
         {
             _userManager.DeleteAsync(user);
         }
 
-        async Task IReposUser<User>.Update(User user)
+        public async Task<User> GetUser(string id)
         {
-            await _userManager.UpdateAsync(user);
+            return await _userManager.FindByIdAsync(id);
         }
 
-        IEnumerable<User> IReposUser<User>.GetAll()
+        public async Task<User> GetUser(string username, User[] users)
+        {
+            User finded = null;
+            foreach(var user in users)
+            {
+                if (user.UserName == username) { return finded = user; }
+                if ( finded != null) break;
+            }
+            return finded;
+        }
+
+        public IEnumerable<User> GetAll()
         {
             return _userManager.Users.ToList();
         }
-
-        //User IRepos<User>.GetById(int id)
-        //{
-        //    string Id = Convert.ToString(id);
-        //    List<User> allUsers = _userManager.Users.ToList();
-        //    foreach(User user in allUsers)
-        //    { 
-        //        if ( user.Id == Id)
-        //        {
-        //            return user;
-        //        }
-        //    }
-        //}
 
         public async Task<SignInResult> Login(string username, string password, bool remember)
         {
@@ -65,24 +64,19 @@ namespace DAL.Repositories
             await _signInManager.SignOutAsync();
         }
 
-        public async Task AddRole(User user, string role)
+        public async Task GiveRole(User user, string role)
         {
             await _userManager.AddToRoleAsync(user, role);
         }
 
-        public IList<string> GetRoles(User user)
+        public string[] GetRoles(User user)
         {
-            return _userManager.GetRolesAsync(user).Result;
+            return _userManager.GetRolesAsync(user).Result.ToArray();
         }
 
         public async Task RemoveRole(User user, string role)
         {
             await _userManager.RemoveFromRoleAsync(user, role);
         }
-
-        
-
     }
-
-
 }

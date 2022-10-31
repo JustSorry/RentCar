@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using RentCar.DAL.Models;
+using DAL.Models;
 
 namespace DAL.Data
 {
@@ -17,9 +17,5 @@ namespace DAL.Data
             optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=rentcar.db;Trusted_Connection=True;");
         }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<User>().HasCheckConstraint("Age", "Age > 17 AND Age < 100");
-        //}
     }
 }

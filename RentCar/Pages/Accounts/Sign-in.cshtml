@@ -5,17 +5,14 @@
 }
 <div class="sign-in-menu">
     <form method="post">
-        <div asp-validation-summary="ModelOnly"></div>
         <h1 class="sign-in">Sign in</h1>
         <div class="text-center">
-            <label asp-for="model.Username"></label><br />
-            <input asp-for="model.Username" />
-            <span asp-validation-for="model.Username"></span>
+            <label>Username</label><br />
+            <input type="text" name="username" value="@Model.Username" />
         </div>
         <div class="text-center">
-            <label asp-for="model.Password"></label><br />
-            <input asp-for="model.Password" />
-            <span asp-validation-for="model.Password"></span>
+            <label>Password</label><br />
+            <input type="password" name="password" />
         </div>
         <div class="text-center">
             <br />
@@ -24,4 +21,5 @@
         <br /><br />
     </form>
 </div>
+
 

@@ -1,39 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using DAL.Data;
-using RentCar.DAL.Models;
-using System.Collections;
+using DAL.Models;
 using DAL.Contracts;
 
-namespace RentCar.DAL.Repositories
+namespace DAL.Repositories
 {
-	public class ReposCar : IReposCar<Car>
+	public class ReposCar : ICarContracts<Car>
 	{
 		private ApplicationContext db = new ApplicationContext();
 
-		async Task IReposCar<Car>.Create(Car car)
+		public async Task Create(Car car)
 		{
 			db.Add(car);
 			await db.SaveChangesAsync();
 		}
 
-		void IReposCar<Car>.Delete(Car car)
+		public void Delete(Car car)
 		{
 			db.Cars.Remove(car);
 			db.SaveChangesAsync();
 		}
 
-        async Task IReposCar<Car>.Update(Car car)
+        public async Task Update(Car car)
         {
             db.Update(car);
             await db.SaveChangesAsync();
         }
 
-        IEnumerable <Car> IReposCar<Car>.GetAll()
+        //public async Task<User> GetCar(string id)
+        //{
+        //    return await _carManager.FindByIdAsync(id);
+        //}
+
+        public bool CheckCar(string req, Car car)
+        {
+            bool isFinded;
+            if (car.CarBody == req || car.CountryOfProd == req || car.TypeOfGearbox == req || car.DriveType == req) { return true; }
+            return false;
+        }
+
+		public async Task<Car> GetCar(Car[] allCars, int id)
+		{
+			Car finded = null;
+			foreach (Car car in allCars)
+			{
+				if (car.Id == id)
+				{
+					return car;
+				}
+			}
+			return null;
+		}
+
+        public IEnumerable <Car> GetAll()
 		{
 			List<Car> allCars = db.Cars.ToList();
 			return allCars;

@@ -1,0 +1,22 @@
+﻿ul.manage-operations{
+    display:flex;
+    list-style-type: none;
+}
+
+
+ul.manage-operations li a{
+    font-family:'Comic Sans MS';
+    color: limegreen;
+    padding: 30px;
+}
+
+.managment {
+    border: solid;
+    background-color: gray;
+    border-radius: 25px;
+    max-width: 400px;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    margin-top: 150px;
+}

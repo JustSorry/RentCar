@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RentCar.Models;
+using DAL.Models;
+using DAL.Data;
 
 namespace RentCar.Pages.Moderator
 {

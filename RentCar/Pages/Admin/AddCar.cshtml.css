@@ -1,2 +1,21 @@
-﻿body {
+﻿.add-car-menu {
+    border: solid;
+    border-radius: 25px;
+    background-color: gray;
+    max-width: 400px;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    margin-top: 150px;
+    list-style-type:none;
+}
+
+h2{
+    font-family: 'Comic Sans MS';
+    color: limegreen;
+    text-align: center;
+}
+
+.car-params{
+    align-items: center;
 }

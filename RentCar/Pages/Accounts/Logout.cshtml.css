@@ -1,4 +1,19 @@
-﻿.floating-button {
+﻿.logout-menu {
+    font-family: 'Comic Sans MS';
+    border: solid;
+    border-color: black;
+    border-radius: 25px;
+    background-color: gray;
+    max-width: 400px;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    margin-top: 150px;
+    text-align: center;
+    color: limegreen;
+}
+
+.floating-button {
     text-decoration: none;
     display: inline-block;
     width: 98px;
@@ -8,7 +23,7 @@
     border-color: transparent;
     margin: 10px 20px;
     font-family: 'Montserrat', sans-serif;
-    font-size: 9px;
+    font-size: 11px;
     text-transform: uppercase;
     text-align: center;
     letter-spacing: 2px;

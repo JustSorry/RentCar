@@ -1,47 +1,22 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RentCar.Models;
+using DAL.Models;
+using DAL.Data;
+using BAL.Services;
 
 namespace RentCar.Pages
 {
     public class CarPageModel : PageModel
     {
         public Car takedCar = null;
-        public void OnGet(int Id)
+        CarService carService = new CarService();
+        public async Task OnGet(int Id)
         { 
             using (ApplicationContext db = new ApplicationContext())
             {
                 Car[] allCars = db.Cars.ToArray();
-                takedCar = findCar(allCars, Id);
+                takedCar = await carService.GetCar(allCars, Id);
             }
         }
-
-        private Car findCar(Car[] cars, int id)
-        {
-            Car specificCar = null;
-            foreach (Car car in cars)
-            {
-                if (car.Id == id) specificCar = car;
-                if (specificCar != null) break;
-            }
-            return specificCar;
-        }
-
-        //public Car takedCar = null;
-        //public void OnGet()
-        //{
-        //    string body = Request.Query["CarBody"];
-        //    using (ApplicationContext db = new())
-        //    {
-        //        foreach (Car car in db.Cars/*.ToArray()*/)
-        //        {
-        //            if (car.CarBody == body)
-        //            {
-        //                takedCar = car;
-        //                return;
-        //            }
-        //        }
-        //    }
-        //}
     }
 }

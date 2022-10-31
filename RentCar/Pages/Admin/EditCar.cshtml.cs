@@ -1,23 +1,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RentCar.Models;
+using DAL.Models;
+using DAL.Data;
+using BAL.Services;
 
 namespace RentCar.Pages.Admin
 {
-    public class Operations
-    {
-        public static void CarDelete(string path, Car car)
-        {
-            if (File.Exists("wwwroot" + car.ImgPath)) { File.Delete("wwwroot" + car.ImgPath); }
-        }
-
-        //public static Car CarEdit(Car car)
-        //{
-        //    
-        //}
-    }
-
     [Authorize(policy: "adminRights")]
     public class EditCarModel : PageModel
     {
@@ -42,12 +31,12 @@ namespace RentCar.Pages.Admin
 
         public async Task<IActionResult> OnPostAsync(bool delBtnPushed/*, bool editBtnPushed*/)
         {
-            //if (!delBtnPushed) return RedirectToPage("/Index");
+            CarService carService = new CarService();
             if (delBtnPushed)
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    Operations.CarDelete(currentCar.ImgPath, currentCar);
+                    carService.CarDelete(currentCar.ImgPath, currentCar);
                     db.Cars.Remove(currentCar);
                     db.SaveChanges();
                 }

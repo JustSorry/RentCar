@@ -4,48 +4,83 @@
 	ViewData["Title"] = "Adding car";
 }
 
-<div class="add-car-menu">
+
+<div >
 	<form method="post" enctype="multipart/form-data">
-		<h2 class="add-car-h2">This is add car menu.</h2>
-		<div>
-			<input class="input-img" type="file" name="img" value="@Model.newCar.ImgPath" />
-		</div>
-		<div class="name-car-params">
-			<input class="car-params" placeholder="Brand" value="@Model.newCar.Brand" name="brand" type="text" />
-		</div>
-		<div class="name-car-params">
-			<input class="car-params" placeholder="Model" value="@Model.newCar.Model" name="model" type="text" />
-		</div>
-		<div class="name-car-params">
-			<input class="car-params" placeholder="Body type" value="@Model.newCar.CarBody" name="carBody" type="text" />
-		</div>
-		<div class="name-car-params">
-			<input class="car-params" placeholder="Year of production" value="@Model.newCar.YearOfProd" name="yearOfProd" type="text" />
-		</div>
-		<div class="name-car-params">
-			<input class="car-params" placeholder="Drive type" value="@Model.newCar.DriveType" name="driveType" type="text" />
-		</div>
-		<div class="name-car-params">
-			<input class="car-params" placeholder="Country of production" value="@Model.newCar.CountryOfProd" name="countryOfProd" type="text" />
-		</div>
-		<div class="name-car-params">
-			<input class="car-params" placeholder="Type of engine" value="@Model.newCar.TypeOfEngine" name="typeOfEngine" type="text" />
-		</div>
-		<div class="name-car-params">
-			<input class="car-params" placeholder="Engine size (capacity)" value="@Model.newCar.EngineV" name="engineV" type="text" />
-		</div>
-		<div class="name-car-params">
-			<input class="car-params" placeholder="Gearbox type" value="@Model.newCar.TypeOfGearbox" name="typeOfGearbox" type="text" />
-		</div>
-		<div class="name-car-params">
-			<input class="car-params" placeholder="Milleage" value="@Model.newCar.Milleage" name="milleage" type="text" />
-		</div>
-		<div class="name-car-params">
-			<input class="car-params" placeholder="Day price" value="@Model.newCar.DayPrice" name="dayPrice" type="text" />
-		</div>
-		<div class="name-car-params">
-			<input class="car-params" placeholder="Week price" value="@Model.newCar.WeekPrice" name="weekPrice" type="text" />
-		</div>
-		<button type="submit" name="CreateStart" value="True">Add car</button> />
+		<ul class="add-car-menu">
+			<li>
+				<h2 class="add-car-h2">This is add car menu.</h2>
+			</li>
+			<li>
+				<div class="name-car-params">
+					<input class="car-params" placeholder="Brand" value="@Model.newCar.Brand" name="brand" />
+				</div>
+			</li>
+			<li>
+				<div class="name-car-params">
+					<input class="car-params" placeholder="Model" value="@Model.newCar.Model" name="model" />
+				</div>
+			</li>
+			<li>
+				<div class="name-car-params">
+					<input class="car-params" placeholder="Body type" value="@Model.newCar.CarBody" name="carBody" />
+				</div>
+			</li>
+			<li>
+				<div class="name-car-params">
+					<input class="car-params" placeholder="Year of production" value="@Model.newCar.YearOfProd" name="yearOfProd" />
+				</div>
+			</li>
+			<li>
+				<div class="name-car-params">
+					<input class="car-params" placeholder="Drive type" value="@Model.newCar.DriveType" name="driveType" />
+				</div>
+			</li>
+			<li>
+				<div class="name-car-params">
+					<input class="car-params" placeholder="Country of production" value="@Model.newCar.CountryOfProd" name="countryOfProd" />
+				</div>
+			</li>
+			<li>
+				<div class="name-car-params">
+					<input class="car-params" placeholder="Type of engine" value="@Model.newCar.TypeOfEngine" name="typeOfEngine" />
+				</div>
+			</li>
+			<li>
+				<div class="name-car-params">
+					<input class="car-params" placeholder="Engine size (capacity)" value="@Model.newCar.EngineV" name="engineV"  />
+				</div>
+			</li>
+			<li>
+				<div class="name-car-params">
+					<input class="car-params" placeholder="Gearbox type" value="@Model.newCar.TypeOfGearbox" name="typeOfGearbox" />
+				</div>
+			</li>
+			<li>
+				<div class="name-car-params">
+					<input class="car-params" placeholder="Milleage" value="@Model.newCar.Milleage" name="milleage" />
+				</div>
+			</li>
+			<li>
+				<div class="name-car-params">
+					<input class="car-params" placeholder="Day price" value="@Model.newCar.DayPrice" name="dayPrice" />
+				</div>
+			</li>
+			<li>
+				<div class="name-car-params">
+					<input class="car-params" placeholder="Week price" value="@Model.newCar.WeekPrice" name="weekPrice" />
+				</div>
+				<br />
+			</li>
+			<li>
+				<div>
+					<input class="input-img" type="file" name="img" value="@Model.newCar.ImgPath" />
+				</div>
+			</li>
+			<li>
+				<br />
+				<button type="submit" name="CreateStart" value="True">Add car</button><br /><br />
+			</li>
+		</ul>
 	</form>
 </div>
