@@ -10,6 +10,7 @@ namespace BAL.Interfaces
 {
     interface IUserService
     {
+        Task Update(User user);
         Task AddRole(User user, string roleName);
         string[] GetRoles(User user);
         Task RemoveRole(User user, string roleName);

@@ -52,8 +52,13 @@
 			</li>
 		</ul>
 		@if (User.IsInRole("admin") || User.IsInRole("moderator")) {<a class="edit-car-button" href="/Admin/EditCar?id=@Model.takedCar.Id">Edit car</a>}
-		<button>Rentfor a day</button>
-		<button>Rent for a week</button>
+		<form method="post" >
+			<div>
+				<input name="carId" value="@Model.takedCar.Id" hidden/>
+				<button class="rent-button" name="rentTermButton" value="1">Rent for a day</button>
+				<button class="rent-button" name="rentTermButton" value="7">Rent for a week</button>
+			</div>
+		</form>
 	</body>
 </html>
 

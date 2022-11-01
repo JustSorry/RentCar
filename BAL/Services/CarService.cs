@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using BAL.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using DAL.Data;
 
 namespace BAL.Services
 {
@@ -53,6 +55,12 @@ namespace BAL.Services
         //    return res;
         //}
 
+
+        public void RentCar(DateTime rentStartDate, DateTime rentEndDate, Car car, User user)
+        {
+            user.RentTime.Add(new RentTime {User = user, Car = car, RentStartTime = rentStartDate, RentEndTime = rentEndDate});
+        }
+      
         public void Delete(Car car)
         {
             FileService.Delete(car.ImgPath);

@@ -11,5 +11,7 @@ namespace DAL.Models
         //public string? PhoneNum { get; set; }
         //public string? Password { get; set; }
         public double Money { get; set; }
+        public List<Car> RentingCars { get; set; } = new();
+        public List<RentTime> RentTime { get; set; } = new();       
     }
 }

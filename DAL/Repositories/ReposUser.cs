@@ -28,6 +28,11 @@ namespace DAL.Repositories
             return await _userManager.CreateAsync(user, password);
         }
 
+        public async Task Update(User user)
+        {
+            await _userManager.UpdateAsync(user);
+        }
+
         public void Delete(User user)
         {
             _userManager.DeleteAsync(user);
@@ -35,7 +40,7 @@ namespace DAL.Repositories
 
         public async Task<User> GetUser(string id)
         {
-            return await _userManager.FindByIdAsync(id);
+            return _userManager.Users.Include(user => user.RentingCars).First(user=>user.Id == id);
         }
 
         public async Task<User> GetUser(string username, User[] users)

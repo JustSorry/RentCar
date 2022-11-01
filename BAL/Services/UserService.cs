@@ -70,4 +70,9 @@ public class UserService : IUserService
     {
         return await _repository.GetUser(username, users);
     }
+
+    public async Task Update(User user)
+    {
+        await _repository.Update(user);
+    }
 }

@@ -16,4 +16,6 @@
         public double? DayPrice { get; set; }
         public double? WeekPrice { get; set; } 
         public string? ImgPath { get; set; }
+        public List<User> Users { get; set; } = new();
+        public List<RentTime> RentTime { get; set; } = new();
     }
