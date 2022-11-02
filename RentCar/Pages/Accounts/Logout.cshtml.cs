@@ -1,6 +1,4 @@
-using DAL.Models;
-using BAL.Services;
-using Microsoft.AspNetCore.Identity;
+using BAL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -8,10 +6,13 @@ namespace BookStore.Pages.Account
 {
     public class LogoutModel : PageModel
     {
-        private readonly UserService _userService;
+        private readonly IUserService _userService;
 
-        public LogoutModel(UserManager<User> userManager, SignInManager<User> signInManager) { _userService = new(userManager, signInManager); }
-        
+        public LogoutModel(IUserService userService) 
+        { 
+            _userService = userService; 
+        }
+
         public async Task<IActionResult> OnPost(bool IsLogout)
         {
             if (IsLogout) await _userService.Logout();

@@ -1,7 +1,7 @@
-﻿@page
+﻿ @page
 @model RentCar.Pages.CarPageModel
 @{
-	ViewData["Title"] = $"{Model.takedCar.Brand} {Model.takedCar.Model}";
+	ViewData["Title"] = $"Car Page";
 }
 @{string countryLower = (Model.takedCar.CountryOfProd).ToLower();}
 
@@ -55,8 +55,8 @@
 		<form method="post" >
 			<div>
 				<input name="carId" value="@Model.takedCar.Id" hidden/>
-				<button class="rent-button" name="rentTermButton" value="1">Rent for a day</button>
-				<button class="rent-button" name="rentTermButton" value="7">Rent for a week</button>
+				<button class="floating-button" name="rentTermButton" value="1">Rent for a day</button>
+				<button class="floating-button" name="rentTermButton" value="7">Rent for a week</button>
 			</div>
 		</form>
 	</body>

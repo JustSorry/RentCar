@@ -62,7 +62,7 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="my-account">
-                                <a class="nav-link" href="/Accounts/MyAccount?nickname=@User.Identity.Name">My account</a>
+                                <a class="nav-link" href="/Accounts/MyAccount?nickname=@User.Claims?.First().Value">My account</a>
                             </li>
                         }
                         else

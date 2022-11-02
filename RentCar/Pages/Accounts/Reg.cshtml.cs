@@ -5,25 +5,26 @@ using System.ComponentModel.DataAnnotations;
 using DAL.Models;
 using BAL.Services;
 using DAL.Data;
+using BAL.Interfaces;
 
 namespace RentCar.Pages.Accounts
 {
     public class RegModel : PageModel
     {
-        private readonly UserService _serviceUser;
+        private readonly IUserService _userService;
         public string Username { get; set; } = String.Empty;
         public string Email { get; set; } = String.Empty;
 
-        public RegModel(UserManager<User> userManager, SignInManager<User> signInManager)
+        public RegModel(IUserService userService)
         {
-            _serviceUser = new(userManager, signInManager);
+            _userService = userService;
         }
         public async Task<IActionResult> OnPostAsync()
         {
             Username = Request.Form["username"];
             Email = Request.Form["email"];
 
-            var result = await _serviceUser.Register(
+            var result = await _userService.Register(
                 Request.Form["username"],
                 Request.Form["email"],
                 Request.Form["passwordConfirm"],
@@ -38,50 +39,6 @@ namespace RentCar.Pages.Accounts
             return Page();
         }
     }
-    //public class RegViewModel
-    //{
-    //    [Required]
-    //    [Display(Name = "Username")]
-    //    public string? Username { get; set; }
-
-    //    [Required]
-    //    [Display(Name = "Email")]
-    //    public string? Email { get; set; }
-
-    //    [Required]
-    //    [DataType(DataType.Password)]
-    //    [Display(Name = "Password")]
-    //    public string? Password { get; set; }
-
-    //    [Required]
-    //    [Compare("Password", ErrorMessage = "Passwords are not compare")]
-    //    [DataType(DataType.Password)]
-    //    [Display(Name = "Confirm the password")]
-    //    public string? PasswordConfirm { get; set; }
-    //}
-    //private async Task<IActionResult> Register()
-    //{
-    //    if (ModelState.IsValid)
-    //    {
-    //        User user = new User { Email = model.Email, UserName = model.Username, Money = 10000000000};
-
-    //        var result = await _serviceUser.Create(user, model.Password);
-
-    //        if (result.Succeeded)
-    //        {
-    //            await _signInManager.SignInAsync(user, false);
-    //            return RedirectToPage("/Index");
-    //        }
-    //        else
-    //        {
-    //            foreach (var error in result.Errors)
-    //            {
-    //                ModelState.AddModelError(string.Empty, error.Description);
-    //            }
-    //        }
-    //    }
-    //    return Page();
-
-    //}
+    
 
 }

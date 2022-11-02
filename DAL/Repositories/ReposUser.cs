@@ -12,7 +12,7 @@ using DAL.Contracts;
 
 namespace DAL.Repositories
 {
-	public class ReposUser : IReposUser<User>
+	public class ReposUser : IReposUser
 	{
         private SignInManager<User> _signInManager;
 		private UserManager<User> _userManager;
@@ -38,22 +38,12 @@ namespace DAL.Repositories
             _userManager.DeleteAsync(user);
         }
 
+
         public async Task<User> GetUser(string id)
         {
-            return _userManager.Users.Include(user => user.RentingCars).First(user=>user.Id == id);
+            return _userManager.Users.Include(user => user.RentingCars).Include(user => user.RentTime).First(user=>user.Id == id);
         }
-
-        public async Task<User> GetUser(string username, User[] users)
-        {
-            User finded = null;
-            foreach(var user in users)
-            {
-                if (user.UserName == username) { return finded = user; }
-                if ( finded != null) break;
-            }
-            return finded;
-        }
-
+       
         public IEnumerable<User> GetAll()
         {
             return _userManager.Users.ToList();

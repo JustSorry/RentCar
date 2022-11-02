@@ -10,15 +10,14 @@ namespace DAL.Models
 {
 	public class RentTime
 	{
-        [Required][Key]
-        public int UserId { get; set; }
-        public User? User { get; set; }
+        [Key]
+        public string UserId { get; set; }
+        public User User { get; set; }
 
         public int CarId { get; set; }
-        public Car? Car { get; set; }
+        public Car Car { get; set; }
 		
         public DateTime RentStartTime { get; set; }
         public DateTime RentEndTime { get; set; }
-
     }
 }

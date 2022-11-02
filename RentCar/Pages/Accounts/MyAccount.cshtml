@@ -10,6 +10,12 @@
         <h1 class="hello-user"><strong>Hello @User.Identity.Name</strong></h1>
         @*<p class="money">Your money =$@Model.CurrentUser.Money (WOW)</p>*@
         <ul class="my-account-menu">
+            @if(@User.Identity.IsAuthenticated)
+            {
+                <li>
+                    <a href="/Accounts/RentingCars?UserId=@Model.CurrentUser?.Id">Actual rents</a>
+                </li>   
+            }
             <li>
                <a href="/Accounts/Logout">Logout</a>
             </li>

@@ -8,7 +8,7 @@ using DAL.Models;
 
 namespace DAL.Contracts
 {
-    public interface IReposUser<T>
+    public interface IReposUser
     {
         Task GiveRole(User user, string role);
         string[] GetRoles(User user);
@@ -17,7 +17,7 @@ namespace DAL.Contracts
         Task<SignInResult> Login(string username, string password, bool remember);
         Task Logout();
         Task<IdentityResult> Create(User user, string password);
-
+        Task<User> GetUser(string id);
         IEnumerable<User> GetAll();
     }
 }

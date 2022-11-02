@@ -1,22 +1,18 @@
-﻿using DAL.Repositories;
+﻿using BAL.Interfaces;
 using DAL.Models;
+using DAL.Contracts;
 using Microsoft.AspNetCore.Http;
-using BAL.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.CompilerServices;
-using BAL.Interfaces;
-using Microsoft.AspNetCore.Identity;
-using DAL.Data;
 
 namespace BAL.Services
 {
-	public class CarService : ICarService
+    public class CarService : ICarService
 	{
-        private ReposCar _repositoryCar = new();
+        private IReposCar _repositoryCar;
+
+        public CarService(IReposCar repositoryCar)
+        {
+            _repositoryCar = repositoryCar;
+        }
 
         public async Task<ActionResult<Car>> NewCar(string brand, string model, string carBody, int yearOfProd, string driveType, string countryOfProd, string typeOfEngine, double engineV, string typeOfGearbox, int milleage, double dayPrice, double weekPrice, IFormFile sourceImage)
         {
@@ -56,9 +52,23 @@ namespace BAL.Services
         //}
 
 
-        public void RentCar(DateTime rentStartDate, DateTime rentEndDate, Car car, User user)
+        public bool RentCar(DateTime rentStartDate, DateTime rentEndDate, Car car, User user)
         {
-            user.RentTime.Add(new RentTime {User = user, Car = car, RentStartTime = rentStartDate, RentEndTime = rentEndDate});
+            if (user.RentTime.Count == 0) 
+            {
+                user.RentTime.Add(new RentTime { UserId = user.Id, User = user, Car = car, CarId = car.Id, RentStartTime = rentStartDate, RentEndTime = rentEndDate });
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void DeleteRentCar(RentTime rentTime, User user)
+        {
+            user.RentTime = null;
+            _repositoryCar.RentTimeDelete(rentTime, user);
         }
       
         public void Delete(Car car)
@@ -67,9 +77,9 @@ namespace BAL.Services
             _repositoryCar.Delete(car);
         }
 
-        public async Task<Car> GetCar(Car[] allCars, int id)
+        public async Task<Car> GetCar(int id)
         {
-            return await _repositoryCar.GetCar(allCars, id);
+            return await _repositoryCar.GetCar(id);
         }
 
         public IEnumerable<Car> GetAllCars()
@@ -85,6 +95,11 @@ namespace BAL.Services
         public async Task CarDelete(string path, Car car)
         {
             if (File.Exists("wwwroot" + car.ImgPath)) { File.Delete("wwwroot" + car.ImgPath); }
+        }
+
+        public async Task Update(Car car)
+        {
+            await _repositoryCar.Update(car);
         }
     }
 }

@@ -1,10 +1,9 @@
+using BAL.Interfaces;
+using BAL.Services;
+using DAL.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using DAL.Models;
-using BAL.Services;
-using DAL.Data;
 using ActionResult = BAL.Services.ActionResult<DAL.Models.Car>;
 
 namespace RentCar.Pages.Admin
@@ -12,13 +11,20 @@ namespace RentCar.Pages.Admin
     [Authorize(policy: "adminRights")]
     public class AddCarModel : PageModel
     {
-        CarService _carService = new();
+        private ICarService _carService;
+        public AddCarModel(ICarService carService)
+        {
+            _carService = carService;
+        }
+
         public ActionResult ActionResult = new();
         public Car newCar = new();
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(bool CreateStart)
         {
-            ActionResult = await _carService.Add(
+            if (CreateStart)
+            {
+                ActionResult = await _carService.Add(
                 Request.Form["brand"],
                 Request.Form["model"],
                 Request.Form["carBody"],
@@ -32,9 +38,13 @@ namespace RentCar.Pages.Admin
                 Convert.ToDouble(Request.Form["dayPrice"]),
                 Convert.ToDouble(Request.Form["weekPrice"]),
                 Request.Form.Files["img"]);
-            newCar = ActionResult.Value ?? new();
-            return RedirectToPage("/Catalog", new { Id = ActionResult.Value.Id });
-            return Page();
+                newCar = ActionResult.Value ?? new();
+                return RedirectToPage("/Catalog", new { Id = ActionResult.Value.Id });
+                return Page();
+            }
+            else
+                return RedirectToPage("/Admin/CarMng");
+            
         }
 
     }

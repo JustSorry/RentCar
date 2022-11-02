@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication;
 using DAL.Models;
-using DAL.Data;
+using BAL.Interfaces;
 using BAL.Services;
 using Microsoft.AspNetCore.Authorization;
 
@@ -12,9 +12,8 @@ namespace RentCar.Pages.Moderator
     [Authorize(policy:"moderRights")]
     public class GiveRoleModel : PageModel
     {
-        private readonly UserService _userService;
+        private readonly IUserService _userService;
         public List<UserRoleModel> Users { get; set; } = new();
-        public string Req { get; set; } = "";
 
         public class UserRoleModel
         {
@@ -22,9 +21,9 @@ namespace RentCar.Pages.Moderator
             public List<string> userRole { get; set; }
         }
 
-        public GiveRoleModel(UserManager<User> userManager, SignInManager<User> signInManager)
+        public GiveRoleModel(IUserService userService)
         {
-            _userService = new(userManager, signInManager);
+            _userService = userService;
         }
 
 
@@ -55,31 +54,3 @@ namespace RentCar.Pages.Moderator
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-        //UserManager<User> userManager;
-        //public List<UserRoleModel> Users { get; set; } = new List<UserRoleModel>();     // for adding newUserModel 
-
-//public async Task<PageResult> OnGet()
-//{
-//    using (ApplicationContext db = new ApplicationContext())
-//    {
-//        foreach(User user in db.Users.ToList())
-//        {
-//            var userRoles = await userManager.GetRolesAsync(user);
-//            UserRoleModel newUserRole = new UserRoleModel() { currentUser = user, userRole = userRoles.ToList() };
-//            Users.Add(newUserRole);
-//        }
-//    }
-//    return Page();
-//}

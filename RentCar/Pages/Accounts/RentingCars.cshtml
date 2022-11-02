@@ -1,0 +1,41 @@
+﻿@page
+@model RentCar.Pages.Accounts.RentingCarsModel
+@{
+	ViewData["Title"] = "Actual rents";
+}
+
+<body>
+	@if(Model.rentingCar!=null)
+	{
+		<table class="actual-rent-table">
+			<tr class="table-headers">
+				<th>
+					<p><strong>Car</strong></p>
+				</th>
+				<th class="borders">
+					<p><strong>Rent start date</strong></p>
+				</th>
+				<th class="borders">
+					<p><strong>Rent end date</strong></p>
+				</th>
+				<th class="borders"> </th>
+			</tr>
+			<tr>
+				<td>
+					<a href="/CarPage?Id=@Model.rentingCar.Id">@Model.rentingCar.Brand @Model.rentingCar.Model</a>
+				</td>
+				<td class="borders">
+					<p>@Model.UserRent.RentStartTime</p>
+				</td>
+				<td class="borders">
+					<p>@Model.UserRent.RentEndTime</p>
+				</td>
+				<td class="borders"><form method="post"><button name="deleteRent" value="True">Stop rent</button></form></td>
+			</tr>
+		</table>
+	}
+	else
+	{
+		<h1 class="no-cars">You are haven't any cars</h1>
+	}
+</body>

@@ -6,7 +6,7 @@ using DAL.Contracts;
 
 namespace DAL.Repositories
 {
-	public class ReposCar : ICarContracts<Car>
+	public class ReposCar : IReposCar
 	{
 		private ApplicationContext db = new ApplicationContext();
 
@@ -14,6 +14,12 @@ namespace DAL.Repositories
 		{
 			db.Add(car);
 			await db.SaveChangesAsync();
+		}
+
+		public void RentTimeDelete(RentTime rentTime, User user)
+		{
+			db.RentTime.Remove(rentTime);
+			db.SaveChanges();
 		}
 
 		public void Delete(Car car)
@@ -28,11 +34,6 @@ namespace DAL.Repositories
             await db.SaveChangesAsync();
         }
 
-        //public async Task<User> GetCar(string id)
-        //{
-        //    return await _carManager.FindByIdAsync(id);
-        //}
-
         public bool CheckCar(string req, Car car)
         {
             bool isFinded;
@@ -40,17 +41,9 @@ namespace DAL.Repositories
             return false;
         }
 
-		public async Task<Car> GetCar(Car[] allCars, int id)
+		public async Task<Car> GetCar(int id)
 		{
-			Car finded = null;
-			foreach (Car car in allCars)
-			{
-				if (car.Id == id)
-				{
-					return car;
-				}
-			}
-			return null;
+			return await db.Cars.FindAsync(id);
 		}
 
         public IEnumerable <Car> GetAll()

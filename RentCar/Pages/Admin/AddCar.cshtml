@@ -4,7 +4,6 @@
 	ViewData["Title"] = "Adding car";
 }
 
-
 <div >
 	<form method="post" enctype="multipart/form-data">
 		<ul class="add-car-menu">
@@ -75,11 +74,13 @@
 			<li>
 				<div>
 					<input class="input-img" type="file" name="img" value="@Model.newCar.ImgPath" />
+					<p>Recommended .png images. Only 2:1 aspect ratio</p>
 				</div>
 			</li>
 			<li>
 				<br />
-				<button type="submit" name="CreateStart" value="True">Add car</button><br /><br />
+				<button class="floating-button" type="submit" name="CreateStart" value="True">Add car</button>
+				<button class="floating-button" type="submit" name="CreateStart" value="False">Cancel</button><br /><br />
 			</li>
 		</ul>
 	</form>

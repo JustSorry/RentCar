@@ -1,27 +1,27 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using DAL.Models;
-using DAL.Data;
-using System.Reflection.Metadata.Ecma335;
-using DAL.Repositories;
 using BAL.Services;
+using BAL.Interfaces;
+using DAL.Data;
+using DAL.Models;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RentCar.Pages
 {
     public class CarSelectModel : PageModel
     {
-        public Car[] ResCars = new Car[0];
+        private ICarService _carService;
+        public Car[] ResCars;
         public new string? Request;
-        CarService carService = new CarService();
+       
+        public CarSelectModel(ICarService carService)
+        {
+            _carService = carService;
+        }
 
         public void OnGet(string? req)
         {
             Request = req;
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                Car[] carArray = db.Cars.ToArray();
-                ResCars = (from car in carArray where carService.CheckCar(Request ?? "", car) select car).ToArray();
-            }
+            Car[] carArray = _carService.GetAllCars().ToArray();
+            ResCars = (from car in carArray where _carService.CheckCar(Request ?? "", car) select car).ToArray();
         }
     }
 }

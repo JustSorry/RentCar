@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using DAL.Data;
 using DAL.Models;
+using BAL.Interfaces;
+using BAL.Services;
+using DAL.Contracts;
+using DAL.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +27,15 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("moderRights",
         policy => policy.RequireRole("moderator"));
 });
+
+builder.Services.AddTransient<IRoleService, RoleService>();
+builder.Services.AddTransient<IRentTimeService, RentTimeService>();
+builder.Services.AddTransient<ICarService, CarService>();
+builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IReposRentTime, ReposRentTime>();
+builder.Services.AddTransient<IReposRole, ReposRole>();
+builder.Services.AddTransient<IReposCar, ReposCar>();
+builder.Services.AddTransient<IReposUser, ReposUser>();
 
 var app = builder.Build();
 

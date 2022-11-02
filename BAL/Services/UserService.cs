@@ -1,18 +1,18 @@
-﻿using DAL.Repositories;
-using Microsoft.AspNetCore.Identity;
+﻿using BAL.Interfaces;
+using DAL.Contracts;
 using DAL.Models;
-using System.Security.Claims;
-using BAL.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace BAL.Services;
 
 public class UserService : IUserService
 {
-    public readonly ReposUser _repository;
+    public readonly IReposUser _repository;
+    
 
-    public UserService(UserManager<User> userManager, SignInManager<User> signInManager)
+    public UserService(IReposUser reposUser)
     {
-        _repository = new ReposUser(signInManager, userManager);    
+        _repository = reposUser;    
     }
 
     public async Task AddRole(User user, string roleName)
@@ -64,11 +64,6 @@ public class UserService : IUserService
     public async Task<User> GetUser(string id)
     {
         return await _repository.GetUser(id);
-    }
-
-    public async Task<User> GetUser(User[] users, string username)
-    {
-        return await _repository.GetUser(username, users);
     }
 
     public async Task Update(User user)

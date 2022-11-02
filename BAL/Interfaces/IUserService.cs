@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BAL.Interfaces
 {
-    interface IUserService
+    public interface IUserService
     {
         Task Update(User user);
         Task AddRole(User user, string roleName);
@@ -19,6 +19,5 @@ namespace BAL.Interfaces
         Task<IdentityResult> Register(string username, string email, string passwordConfirm, string password);
         IEnumerable<User> GetAllUsers();
         Task<User> GetUser(string id);
-        Task<User> GetUser(User[] users, string username);
     }
 }

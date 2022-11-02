@@ -3,43 +3,41 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using DAL.Models;
 using DAL.Data;
 using BAL.Services;
+using BAL.Interfaces;
 using Microsoft.AspNetCore.Identity;
 
 namespace RentCar.Pages
 {
     public class CarPageModel : PageModel
     {
-        CarService _carService = new CarService();
-        UserService _userService;
-        public CarPageModel(UserManager<User> userManager, SignInManager<User> signInManager)
-        {
-            _userService = new UserService(userManager, signInManager); 
-        }
+        private ICarService _carService;
+        private IUserService _userService;
         public Car takedCar;
         public User actualUser;
-        DateTime RentStartDate { get; set; }
-        DateTime RentEndDate { get; set; }
+
+        public CarPageModel(IUserService userService, ICarService carService)
+        {
+            _userService = userService;
+            _carService = carService;
+        }
         public async Task OnGet(int Id)
-        { 
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                Car[] allCars = db.Cars.ToArray();
-                takedCar = await _carService.GetCar(allCars, Id);
-            }
+        {
+            takedCar =await _carService.GetCar(Id);
         }
 
-        public async Task OnPost(int rentTermButton, int carId)
+
+        public async Task<IActionResult> OnPost(int rentTermButton, int carId)
         {
             actualUser = await _userService.GetUser(User.Claims.First().Value);
-            Car[] allCars = new Car[0];
-            using(ApplicationContext db = new ApplicationContext()) { allCars = db.Cars.ToArray(); }
-            takedCar = await _carService.GetCar(allCars, carId);
-            RentStartDate = DateTime.Now;
-            if(rentTermButton == 1) RentEndDate = RentStartDate.AddDays(1);
-            if(rentTermButton == 7) RentEndDate = RentStartDate.AddDays(7);
-            _carService.RentCar(RentStartDate, RentEndDate, takedCar, actualUser);
-            await _userService.Update(actualUser);
-           //_userService.GetUser(User.Claims.FirstOrDefault().Value)
+            takedCar = await _carService.GetCar(carId);
+            bool isAcceced = _carService.RentCar(DateTime.Now, DateTime.Now.AddDays(rentTermButton), takedCar, actualUser);
+            if (isAcceced)
+            {
+                await _userService.Update(actualUser);
+                return RedirectToPage("/Index");
+            }
+            else return RedirectToPage("/Error");
+            //_userService.GetUser(User.Claims.FirstOrDefault().Value)
         }
     }
 }

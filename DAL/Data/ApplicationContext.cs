@@ -6,10 +6,10 @@ namespace DAL.Data
 {
     public class ApplicationContext : IdentityDbContext<User>
     {
+        public DbSet<RentTime> RentTime { get; set; }
         public DbSet<Car> Cars { get; set; } = null!;
         public ApplicationContext()
         {
-            //Database.EnsureDeleted();
             Database.EnsureCreated();   // creating database in first launch
         }
 

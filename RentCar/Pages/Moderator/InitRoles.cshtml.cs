@@ -1,34 +1,29 @@
-using Microsoft.AspNetCore.Identity;
+using BAL.Services;
+using BAL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using DAL.Models;
-using DAL.Data;
 
-namespace RentCar.Pages.Moderator
+namespace RentCar.Pages.Moderator;
+
+public class InitRolesModel : PageModel
 {
-    public class InitRolesModel : PageModel
+    private IRoleService _roleService;
+    private IUserService _userService;
+
+    public InitRolesModel(IRoleService roleService, IUserService userService)
     {
-        private RoleManager<IdentityRole> roleManager;  
-        private UserManager<User> userManager;
-        public InitRolesModel(RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
-        {
-            this.roleManager = roleManager;
-            this.userManager = userManager;
-        }
+        _roleService = roleService;
+        _userService = userService;
+    }
 
-        public async Task<IActionResult> OnGet()
+    public async Task<IActionResult> OnGet()
+    {
+        if(_userService.GetAllUsers().Count() == 1)
         {
-            using (ApplicationContext db = new())
-            {
-                if (User.Identity.IsAuthenticated && db.Users.Count() == 1)
-                {
-                    await roleManager.CreateAsync(new IdentityRole("admin"));
-                    await roleManager.CreateAsync(new IdentityRole("moderator"));
-                    await userManager.AddToRolesAsync(await userManager.FindByNameAsync(User.Identity.Name), new List<string>() { "moderator", "admin" });
-                }
-
-            }
-            return RedirectToPage("/Index");
+            
+            await _roleService.Create(new string[] { "admin", "moderator" });
+            await _userService.AddRole(await _userService.GetUser(User.Claims.FirstOrDefault().Value), "moderator");
         }
+        return RedirectToPage("/Index");
     }
 }

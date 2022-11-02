@@ -8,12 +8,14 @@ using System.Threading.Tasks;
 
 namespace DAL.Contracts
 {
-    public interface ICarContracts<T>
+    public interface IReposCar
     {
         Task Create(Car car);
         void Delete(Car car);
-
         Task Update(Car car);
         IEnumerable<Car> GetAll();
+        void RentTimeDelete(RentTime rentTime, User user);
+        bool CheckCar(string req, Car car);
+        Task<Car> GetCar(int id);
     }
 }
