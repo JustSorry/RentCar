@@ -39,10 +39,10 @@ th, td{
     cursor: pointer;
 }
 
-    .floating-button:hover {
-        background: #32CD32;
-        box-shadow: 0 15px 20px rgba(46, 229, 157, .4);
-        color: white;
-        transform: translateY(-7px);
-    }
+.floating-button:hover {
+    background: #32CD32;
+    box-shadow: 0 15px 20px rgba(46, 229, 157, .4);
+    color: white;
+    transform: translateY(-7px);
+}
 

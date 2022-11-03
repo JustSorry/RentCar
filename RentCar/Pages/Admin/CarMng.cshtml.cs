@@ -21,18 +21,6 @@ namespace RentCar.Pages.Admin;
         {
             allCars = _carService.GetAllCars().ToArray();
             currentCar = await _carService.GetCar(id);
-            //using (ApplicationContext db = new ApplicationContext())
-            //{
-            //    allCars = db.Cars.ToArray();
-            //    foreach (Car car in allCars)
-            //    {
-            //        if (car.Id == id)
-            //        {
-            //            currentCar = car;
-            //            break;
-            //        }
-            //    }
-            //}
         }
     }
     

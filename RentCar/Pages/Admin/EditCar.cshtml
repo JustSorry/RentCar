@@ -4,9 +4,124 @@
 	ViewData["Title"] = "Edit car menu";
 }
 
-<div>
-	<form method="post">
-		<input type="submit" class="floating-button" value="Delete car" name="delBtnPushed"></input>
+
+
+<div >
+	<form method="post" enctype="multipart/form-data">
+		<div class="edit-car-menu">
+			<h2 class="edit-car-h2">This is edit car menu.</h2>
+			<table class="elements-table">
+				<tr>
+					<td><p class="option-name"><strong>Brand</strong></p></td>
+					<td><input class="select-menu" value="@Model.editCar.Brand" name="brand" /></td>
+				</tr>
+				<tr>
+					<td><p class ="option-name"><strong>Model</strong></p></td>
+					<td><input class="select-menu" value="@Model.editCar.Model" name="model" /></td>
+				</tr>
+				<tr>
+					<td><p class="option-name"><strong>Car body type</strong></p></td>
+					<td>
+						<select name="carBody" class="select-menu">
+							<option selected>@Model.editCar.CarBody</option>
+							<option value="Hatchback">Hatchback</option>
+							<option value="SportCar">SportCar</option>
+							<option value="Sedan">Sedan</option>
+							<option value="Minivan">Minivan</option>
+							<option value="Cabriolet">Cabriolet</option>
+							<option value="Crossover">Crossover</option>
+							<option value="Pick-up">Pick-up</option>
+							<option value="Truck">Truck</option>
+							<option value="Van">Van</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td><p class ="option-name"><strong>Year of production</strong></p></td>
+					<td><input class="input-menu" type="number" value="@Model.editCar.YearOfProd" name="yearOfProd" min="1900" max="@DateTime.Today.Year" /></td>
+				</tr>
+				<tr>
+					<td><p class="option-name"><strong>Drive type</strong></p></td>
+					<td>
+						<select name ="driveType" class="select-menu">
+							<option selected>@Model.editCar.DriveType</option>
+							<option value="FWD">FWD</option>
+							<option value="RWD">RWD</option>
+							<option value="4x4">4x4</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td><p class="option-name">	<strong>Country of production</strong></p></td>
+					<td>
+						<select name="countryOfProd" class="select-menu">
+							<option selected>@Model.editCar.CountryOfProd</option>
+							<option value="Germany">Germany</option>
+							<option value="Japan">Japan</option>
+							<option value="United states">United states</option>
+							<option value="Great Britain">Great Britain</option>
+							<option value="France">France</option>
+							<option value="Sweden">Sweden</option>
+							<option value="Italy">Italy</option>
+							<option value="South Korea">South Korea</option>
+							<option value="Russia">Russia</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td><p class ="option-name"><strong>Type of engine</strong></p></td>
+					<td>
+						<select name="typeOfEngine" class="select-menu">
+							<option selected>@Model.editCar.TypeOfEngine</option>
+							<option value="Petrol">Petrol</option>
+							<option value="Diesel">Diesel</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td><p class="option-name"><strong>Engine capacity</strong></p>	</td>
+					<td>
+						<select name="engineV" class="select-menu">
+							<option selected>@Model.editCar.EngineV</option>
+							@for (decimal i = 0.3m; i < 20; i += 0.1m)
+							{
+								<option value="@i">@i</option>
+							}
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td><p class="option-name"><strong>Type of gearbox</strong></p></td>
+					<td>
+						<select name="typeOfGearbox" class="select-menu">
+							<option selected>@Model.editCar.TypeOfGearbox</option>
+							<option value="Mechanical">Mechanical</option>
+							<option value="Auto">Auto</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td><p class ="option-name"><strong>Milleage</strong></p></td>
+					<td><input class="input-menu" type="number" value="@Model.editCar.Milleage" min="0" name="milleage" /></td>
+				</tr>
+				<tr>
+					<td><p class="option-name"><strong>Day Price</strong></p></td>
+					<td><input class="input-menu" type="number" value="@Model.editCar.DayPrice" name="dayPrice" step="0.5" min="30" max="10000" /></td>
+				</tr>
+				<tr>
+					<td><p class="option-name"><strong>Week price</strong></p></td>
+					<td><input class="input-menu" type="number" value="@Model.editCar.WeekPrice" name="weekPrice" step="0.5" min="300" max="50000" /></td>
+				</tr>
+				<tr>
+					<td><p class="option-name"><input class="input-img" type="file" name="img" value="@Model.editCar.ImgPath" /></p></td>
+					<td><p class="warning">Recommended .png images. Only 2:1 aspect ratio</p></td>
+				</tr>
+			</table>
+			<input name="id" value="@Model.editCar.Id" hidden />
+			<button class="floating-button" type="submit" value="True" name="editBtnPushed">Edit Car</button>
+			<button type="submit" class="floating-button-delete" value="True" name="delBtnPushed">Delete car</button>
+			<button class="floating-button" href="/Catalog">Cancel</button>
+		</div>
+		
 	</form>
-	
 </div>

@@ -8,6 +8,35 @@ th.borders, td.borders {
     border-left: 2px solid darkgray;
 }
 
+button.float-btn {
+    text-decoration: none;
+    display: inline-block;
+    width: 98px;
+    height: 32px;
+    line-height: 32px;
+    border-radius: 45px;
+    border-color: transparent;
+    margin: 10px 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: #524f4e;
+    background: white;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
+    transition: .4s;
+    cursor: pointer;
+}
+
+button.float-btn:hover {
+    background: #c90000;
+    box-shadow: 0 15px 20px rgba(201, 0, 0, 1);
+    color: white;
+    transform: translateY(-7px);
+}
+
 td {
     border-top: 2px solid black;
 }

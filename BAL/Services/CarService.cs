@@ -2,6 +2,7 @@
 using DAL.Models;
 using DAL.Contracts;
 using Microsoft.AspNetCore.Http;
+using System.Runtime.CompilerServices;
 
 namespace BAL.Services
 {
@@ -65,6 +66,27 @@ namespace BAL.Services
             }
         }
 
+        public async Task<ActionResult<Car>> Edit(int id, string brand, string model, string carBody, int yearOfProd, string driveType, string countryOfProd, string typeOfEngine, double engineV, string typeOfGearbox, int milleage, double dayPrice, double weekPrice, IFormFile sourceImage)
+        {
+            var res = await NewCar(brand, model, carBody, yearOfProd, driveType, countryOfProd, typeOfEngine, engineV, typeOfGearbox, milleage, dayPrice, weekPrice, sourceImage);
+            Car car = await _repositoryCar.GetCar(id);
+            car.Brand = res.Value.Brand;
+            car.Model = res.Value.Model;
+            car.CarBody = res.Value.CarBody;
+            car.YearOfProd = res.Value.YearOfProd;
+            car.DriveType = res.Value.DriveType;
+            car.CountryOfProd = res.Value.CountryOfProd;
+            car.TypeOfEngine = res.Value.TypeOfEngine;
+            car.EngineV = res.Value.EngineV;
+            car.TypeOfGearbox = res.Value.TypeOfGearbox;
+            car.Milleage = res.Value.Milleage;
+            car.DayPrice = res.Value.DayPrice;
+            car.WeekPrice = res.Value.WeekPrice;
+            car.ImgPath = res.Value.ImgPath;
+            await _repositoryCar.Update(car);
+            return res;
+        }
+
         public void DeleteRentCar(RentTime rentTime, User user)
         {
             user.RentTime = null;
@@ -92,14 +114,9 @@ namespace BAL.Services
             return _repositoryCar.CheckCar(req, car);
         }
 
-        public async Task CarDelete(string path, Car car)
+        public void Update(Car car)
         {
-            if (File.Exists("wwwroot" + car.ImgPath)) { File.Delete("wwwroot" + car.ImgPath); }
-        }
-
-        public async Task Update(Car car)
-        {
-            await _repositoryCar.Update(car);
+            _repositoryCar.Update(car);
         }
     }
 }

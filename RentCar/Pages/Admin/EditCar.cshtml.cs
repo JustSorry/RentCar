@@ -1,40 +1,61 @@
+using BAL.Interfaces;
+using BAL.Services;
+using DAL.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using DAL.Models;
-using DAL.Data;
-using BAL.Services;
-using BAL.Interfaces;
+using ActionResult = BAL.Services.ActionResult<DAL.Models.Car>;
 
-namespace RentCar.Pages.Admin
+
+namespace RentCar.Pages.Admin;
+
+[Authorize(policy: "adminRights")]
+public class EditCarModel : PageModel
 {
-    [Authorize(policy: "adminRights")]
-    public class EditCarModel : PageModel
+    private readonly ICarService _carService;
+    public Car editCar;
+    public BAL.Services.ActionResult<Car> ActionResult = new ActionResult();
+
+    public EditCarModel(ICarService carService)
     {
-        private readonly ICarService _carService;
-        public EditCarModel(ICarService carService)
-        {
-            _carService = carService;
-        }
+        _carService = carService;
+    }
 
-        public static Car currentCar;
+    public async void OnGet(int id)
+    {
+        editCar = await _carService.GetCar(id);
+    }
 
-        public async void OnGet(int id)
+    public async Task<IActionResult> OnPostAsync(int id, bool delBtnPushed, bool editBtnPushed)
+    {
+        editCar = await _carService.GetCar(id);
+        if (delBtnPushed)
         {
-            currentCar = await _carService.GetCar(id);
-        }
-
-        public async Task<IActionResult> OnPostAsync(bool delBtnPushed/*, bool editBtnPushed*/)
-        {
-            
-            if (delBtnPushed)
-            {
-                await _carService.CarDelete(currentCar.ImgPath, currentCar);
-                _carService.Delete(currentCar);
-                await _carService.Update(currentCar);                                                 /////????????????
-                return RedirectToPage("/Catalog");
-            }
+            _carService.Delete(editCar);
+            _carService.Update(editCar);                                         
             return RedirectToPage("/Catalog");
         }
+        if (editBtnPushed)
+        {
+            ActionResult = await _carService.Edit(
+            editCar.Id,
+            Request.Form["brand"],
+            Request.Form["model"],
+            Request.Form["carBody"],
+            Convert.ToInt32(Request.Form["yearOfProd"]),
+            Request.Form["driveType"],
+            Request.Form["countryOfProd"],
+            Request.Form["typeOfEngine"],
+            Convert.ToDouble(Request.Form["engineV"]),
+            Request.Form["typeOfGearbox"],
+            Convert.ToInt32(Request.Form["milleage"]),
+            Convert.ToDouble(Request.Form["dayPrice"]),
+            Convert.ToDouble(Request.Form["weekPrice"]),
+            Request.Form.Files["img"]);
+            editCar = ActionResult.Value ?? new();
+            return RedirectToPage("/Catalog", new { Id = ActionResult.Value.Id });
+        }
+        return RedirectToPage("/Catalog");
     }
 }
+
