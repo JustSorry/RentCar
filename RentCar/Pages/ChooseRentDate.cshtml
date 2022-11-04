@@ -18,10 +18,7 @@
 
 <div class="choose-rent">
 	<form method="post">
-        @if(@Model.currentUser.RentTime.Count > 0)
-        {
-            Response.Redirect("/Error");
-        }
+        @*@if(@Model.currentUser.RentTime.Count == 1){Response.Redirect("/Error");}*@
         <h1 class="center">@Model.takedCar.Brand @Model.takedCar.Model @Model.takedCar.YearOfProd</h1>
         <input name="currentUserId" value="@Model.currentUser.Id" hidden/>
         <input name="takedCarId" value="@Model.takedCar.Id" hidden />

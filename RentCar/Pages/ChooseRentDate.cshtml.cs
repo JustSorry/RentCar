@@ -33,6 +33,7 @@ public class ChooseRentDateModel : PageModel
         {
             await _userService.Update(currentUser);
         }
+        else Response.Redirect("/Error");
         Response.Redirect("/Index");
     }
 }
