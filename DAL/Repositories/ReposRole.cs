@@ -17,7 +17,7 @@ namespace DAL.Repositories
 		{
 			foreach(string role in roles)
 			{
-				_roleManager.CreateAsync(new IdentityRole(role));
+				await _roleManager.CreateAsync(new IdentityRole(role));
 			}
 		}
 	}

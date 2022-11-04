@@ -23,5 +23,17 @@ namespace DAL.Repositories
 		{
 			return db.RentTime.Find(id);
 		}
-	}
+
+        public async Task RentTimeDelete(RentTime rentTime)
+        {
+            db.RentTime.Remove(rentTime);
+            await db.SaveChangesAsync();
+        }
+
+        public async Task Update(RentTime rentTime)
+        {
+            db.Update(rentTime);
+            await db.SaveChangesAsync();
+        }
+    }
 }

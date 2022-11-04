@@ -1,10 +1,7 @@
+using BAL.Interfaces;
+using DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using DAL.Models;
-using DAL.Data;
-using BAL.Services;
-using BAL.Interfaces;
-using Microsoft.AspNetCore.Identity;
 
 namespace RentCar.Pages
 {
@@ -20,24 +17,21 @@ namespace RentCar.Pages
             _userService = userService;
             _carService = carService;
         }
+
         public async Task OnGet(int Id)
         {
             takedCar =await _carService.GetCar(Id);
         }
 
-
-        public async Task<IActionResult> OnPost(int rentTermButton, int carId)
+        public async Task OnPost(int carId, bool rentBtnPushed)
         {
-            actualUser = await _userService.GetUser(User.Claims.First().Value);
-            takedCar = await _carService.GetCar(carId);
-            bool isAcceced = _carService.RentCar(DateTime.Now, DateTime.Now.AddDays(rentTermButton), takedCar, actualUser);
-            if (isAcceced)
+            if(rentBtnPushed)
             {
-                await _userService.Update(actualUser);
-                return RedirectToPage("/Index");
+                actualUser = await _userService.GetUser(User.Claims.First().Value);
+                takedCar = await _carService.GetCar(carId);
+                Response.Redirect($"/ChooseRentDate?currentUserId={actualUser.Id}&takedCarId={takedCar.Id}");
             }
-            else return RedirectToPage("/Error");
-            //_userService.GetUser(User.Claims.FirstOrDefault().Value)
+            
         }
     }
 }

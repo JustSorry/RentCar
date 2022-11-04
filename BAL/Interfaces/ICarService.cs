@@ -14,7 +14,6 @@ namespace BAL.Interfaces
         IEnumerable<Car> GetAllCars();
         bool CheckCar(string req, Car car);
         bool RentCar(DateTime rentStartDate, DateTime rentEndDate, Car car, User user);
-        void DeleteRentCar(RentTime rentTime, User user);
         void Update(Car car);
     }
 }

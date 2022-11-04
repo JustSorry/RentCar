@@ -1,12 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
+namespace RentCar.Pages;
 
-
-namespace RentCar.Pages
-{
-    public class CatalogModel : PageModel
-    { 
-    }
+public class CatalogModel : PageModel
+{ 
 }

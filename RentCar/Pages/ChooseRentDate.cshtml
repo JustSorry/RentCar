@@ -1,0 +1,40 @@
+﻿@page
+@using System.Globalization
+@model RentCar.Pages.ChooseRentDateModel
+@{
+    ViewData["Title"] = "Rent car menu";
+    string datestrToday = DateTime.Today.ToShortDateString();
+    string datestrPlusDay = DateTime.Today.AddDays(1).ToShortDateString();
+    string datestrPlusWeek = DateTime.Today.AddDays(7).ToShortDateString();
+    string datestrPlusMonth = DateTime.Today.AddMonths(1).ToShortDateString();
+
+    string formatsrc  = "dd.MM.yyyy";
+    string formatdst  = "yyyy-MM-dd";
+    DateTime today = DateTime.ParseExact(datestrToday, formatsrc, CultureInfo.InvariantCulture);
+    DateTime plusDay = DateTime.ParseExact(datestrPlusDay, formatsrc, CultureInfo.InvariantCulture);
+    DateTime plusWeek = DateTime.ParseExact(datestrPlusWeek, formatsrc, CultureInfo.InvariantCulture);
+    DateTime plusMonth = DateTime.ParseExact(datestrPlusMonth, formatsrc, CultureInfo.InvariantCulture);
+}
+
+<div class="choose-rent">
+	<form method="post">
+        @if(@Model.currentUser.RentTime.Count > 0)
+        {
+            Response.Redirect("/Error");
+        }
+        <h1 class="center">@Model.takedCar.Brand @Model.takedCar.Model @Model.takedCar.YearOfProd</h1>
+        <input name="currentUserId" value="@Model.currentUser.Id" hidden/>
+        <input name="takedCarId" value="@Model.takedCar.Id" hidden />
+		<p class="center">
+            <label class="center" for="date">Rent start date: </label>
+            <input type="date" name="rentStartDate" value="@today.ToString(formatdst)" min="@today.ToString(formatdst)" max="@plusWeek.ToString(formatdst)" />
+            @*<input type="date" name="rentStartDate" value="@DateTime.Today.ToShortDateString()" min="@DateTime.Today.ToShortDateString()" max="@DateTime.Today.AddDays(7).ToShortDateString()" />*@
+            
+        </p>
+        <p class="center">
+            <label class="center" for="date">Rent end date: </label>
+            <input type="date" name="rentEndDate" min="@plusDay.ToString(formatdst)" max="@plusMonth.ToString(formatdst)" />
+        </p>
+        <button class="floating-button" type="submit">Rent car</button>
+	</form>
+</div>

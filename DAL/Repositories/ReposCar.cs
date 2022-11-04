@@ -16,12 +16,6 @@ namespace DAL.Repositories
 			await db.SaveChangesAsync();
 		}
 
-		public void RentTimeDelete(RentTime rentTime, User user)
-		{
-			db.RentTime.Remove(rentTime);
-			db.SaveChanges();
-		}
-
 		public void Delete(Car car)
 		{
 			db.Cars.Remove(car);

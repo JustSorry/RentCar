@@ -14,7 +14,6 @@ namespace DAL.Contracts
         void Delete(Car car);
         Task Update(Car car);
         IEnumerable<Car> GetAll();
-        void RentTimeDelete(RentTime rentTime, User user);
         bool CheckCar(string req, Car car);
         Task<Car> GetCar(int id);
     }

@@ -1,5 +1,7 @@
 using BAL.Interfaces;
 using DAL.Models;
+using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RentCar.Pages.Accounts
@@ -22,11 +24,15 @@ namespace RentCar.Pages.Accounts
         public async Task OnGet(string UserId)
         {
             currentUser = await _userService.GetUser(User.Claims.First().Value);
-            UserRent = await _timeService.GetRentingTime(UserId);                                                   //ERRRRRRRRRRRRRRRRRRRRRRRRORRRRRRRRRRRRRRRRRR
+            UserRent = await _timeService.GetRentingTime(UserId);                                                   
             if (UserRent != null)
             {
+                if (DateTime.Now > UserRent.RentEndTime) 
+                {
+                    await _timeService.DeleteRentCar(UserRent, currentUser);
+                    Response.Redirect($"/Accounts/RentingCars?UserId={UserId}");
+                }
                 rentingCar = await _carService.GetCar(UserRent.CarId);
-                if (DateTime.Now > UserRent.RentEndTime) { _carService.DeleteRentCar(UserRent, currentUser); }
             }
         }
 
@@ -36,7 +42,7 @@ namespace RentCar.Pages.Accounts
             UserRent = await _timeService.GetRentingTime(currentUser.Id);
             if (deleteRent)
             {
-                _carService.DeleteRentCar(UserRent, currentUser);
+                await _timeService.DeleteRentCar(UserRent, currentUser);
             }
             RedirectToPage("/Catalog");
         }

@@ -46,13 +46,6 @@ namespace BAL.Services
             return res;
         }
 
-        //public async Task<ActionResult<Car>> Edit(string brand, string model, string carBody, int yearOfProd, string driveType, string countryOfProd, string typeOfEngine, double engineV, string typeOfGearbox, int milleage, double dayPrice, double weekPrice, IFormFile sourceImage)
-        //{
-        //    var res = await Verificate(brand, model, carBody, yearOfProd, driveType, countryOfProd, typeOfEngine, engineV, typeOfGearbox, milleage, dayPrice, weekPrice, sourceImage);
-        //    return res;
-        //}
-
-
         public bool RentCar(DateTime rentStartDate, DateTime rentEndDate, Car car, User user)
         {
             if (user.RentTime.Count == 0) 
@@ -85,12 +78,6 @@ namespace BAL.Services
             car.ImgPath = res.Value.ImgPath;
             await _repositoryCar.Update(car);
             return res;
-        }
-
-        public void DeleteRentCar(RentTime rentTime, User user)
-        {
-            user.RentTime = null;
-            _repositoryCar.RentTimeDelete(rentTime, user);
         }
       
         public void Delete(Car car)

@@ -20,8 +20,7 @@ public class InitRolesModel : PageModel
     {
         if(_userService.GetAllUsers().Count() == 1)
         {
-            
-            await _roleService.Create(new string[] { "admin", "moderator" });
+            await _roleService.Create(new string[] { "moderator", "admin" });
             await _userService.AddRole(await _userService.GetUser(User.Claims.FirstOrDefault().Value), "moderator");
         }
         return RedirectToPage("/Index");
