@@ -9,32 +9,43 @@ public class ChooseRentDateModel : PageModel
 {
     private readonly ICarService _carService;
     private readonly IUserService _userService;
+    private readonly IRentTimeService _rentTimeService;
+    public IEnumerable<RentTime> allTimes;
     public Car takedCar;
     public User currentUser;
 
-    public ChooseRentDateModel(ICarService carService, IUserService userService)
+    public ChooseRentDateModel(ICarService carService, IUserService userService, IRentTimeService rentTimeService)
     {
         _carService = carService;
         _userService = userService;
+        _rentTimeService = rentTimeService;
     }
 
     public async Task OnGet(string currentUserId, int takedCarId)
     {
+        allTimes = await _rentTimeService.GetAllTimes();
         currentUser = await _userService.GetUser(currentUserId);
         takedCar = await _carService.GetCar(takedCarId);
     }
 
     public async Task OnPostAsync(DateTime rentStartDate, DateTime rentEndDate, string currentUserId, int takedCarId)
     {
+        allTimes = await _rentTimeService.GetAllTimes();
         takedCar = await _carService.GetCar(takedCarId);
         currentUser = await _userService.GetUser(currentUserId);
-        bool isSucceced = _carService.RentCar(rentStartDate, rentEndDate, takedCar, currentUser);
-        if (isSucceced)
+        switch (await _carService.RentCar(rentStartDate, rentEndDate, takedCar, currentUser))
         {
-            await _userService.Update(currentUser);
+            case "success":
+                await _userService.Update(currentUser);
+                Response.Redirect("/Index");
+                break;
+            case "error-havecar":
+                Response.Redirect("/Error?error=error-havecar");
+                break;
+            case "error-car-unavailable":
+                Response.Redirect("/Error?error=error-car-unavb");
+                break;
         }
-        else Response.Redirect("/Error");
-        Response.Redirect("/Index");
     }
 }
 

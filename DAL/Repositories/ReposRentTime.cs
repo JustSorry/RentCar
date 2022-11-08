@@ -1,22 +1,16 @@
 ﻿using DAL.Contracts;
-using DAL.Models;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using DAL.Data;
+using DAL.Models;
 
 namespace DAL.Repositories
 {
-	public class ReposRentTime : IReposRentTime
+    public class ReposRentTime : IReposRentTime
 	{
         private ApplicationContext db = new ApplicationContext();
         public IEnumerable<RentTime> GetAllRentTimes()
 		{
-			return db.RentTime.ToList();
+            List<RentTime> rentTimes = db.RentTime.ToList();
+			return rentTimes;
 		}
 
 		public async Task<RentTime> GetRentTime(string id)

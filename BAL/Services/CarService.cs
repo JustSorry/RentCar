@@ -1,18 +1,21 @@
 ﻿using BAL.Interfaces;
-using DAL.Models;
 using DAL.Contracts;
+using DAL.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
-using System.Runtime.CompilerServices;
 
 namespace BAL.Services
 {
     public class CarService : ICarService
 	{
         private IReposCar _repositoryCar;
+        private IRentTimeService _rentTimeService;
+        private IEnumerable<RentTime> _rentTimeList;
 
-        public CarService(IReposCar repositoryCar)
+        public CarService(IReposCar repositoryCar, IRentTimeService rentTimeService)
         {
             _repositoryCar = repositoryCar;
+            _rentTimeService = rentTimeService;
         }
 
         public async Task<ActionResult<Car>> NewCar(string brand, string model, string carBody, int yearOfProd, string driveType, string countryOfProd, string typeOfEngine, double engineV, string typeOfGearbox, int milleage, double dayPrice, double weekPrice, IFormFile sourceImage)
@@ -42,21 +45,32 @@ namespace BAL.Services
         public async Task<ActionResult<Car>> Add(string brand, string model, string carBody, int yearOfProd, string driveType, string countryOfProd, string typeOfEngine, double engineV, string typeOfGearbox, int milleage, double dayPrice, double weekPrice, IFormFile sourceImage)
         {
             var res = await NewCar(brand, model, carBody, yearOfProd, driveType, countryOfProd, typeOfEngine, engineV, typeOfGearbox, milleage, dayPrice, weekPrice, sourceImage);
-            _repositoryCar.Create(res.Value);
+            await _repositoryCar.Create(res.Value);
             return res;
         }
 
-        public bool RentCar(DateTime rentStartDate, DateTime rentEndDate, Car car, User user)
+        public async Task<string> RentCar(DateTime rentStartDate, DateTime rentEndDate, Car car, User user)
         {
             if (user.RentTime.Count == 0) 
             {
+                _rentTimeList = await _rentTimeService.GetAllTimes();
+                foreach (RentTime time in _rentTimeList)
+                {
+                    if (time.CarId == car.Id)
+                    {                                                                                                                         //ПРОВЕРКИ НА КОНФЛИКТЫ ВРЕМЕН НАЧАЛА И КОНЦА АРЕНДЫ ОПРЕДЕЛЕННОЙ МАШИНЫ МЕЖДУ РАЗНЫМИ ПОЛЬЩОВАТЕЛЯМИ
+                        if ((time.RentStartTime <= rentStartDate && rentStartDate <= time.RentEndTime) ||                                     //День начала больше/равно с пересекающимся существующим днем начала и при этом меньше/равно дню окончания
+                            (rentStartDate < time.RentStartTime && rentEndDate <= time.RentEndTime) ||                                           //День начала меньше/равно с пер. сущ. днем начала и при этом меньше/равно дню окончания
+                            (rentStartDate >= time.RentStartTime && rentEndDate <= time.RentEndTime) ||                                        //Дни начала и окончанию полностью или частично находятся в диапазоне существующей аренды
+                            (rentStartDate <= time.RentEndTime && rentEndDate >= time.RentEndTime))                                              //День начала находится в диапазоне существующей аренды, день окончания больше/равен дню окончания сущ. аренды
+                        {
+                            return "error-car-unavailable";
+                        }
+                    }
+                }
                 user.RentTime.Add(new RentTime { UserId = user.Id, User = user, Car = car, CarId = car.Id, RentStartTime = rentStartDate, RentEndTime = rentEndDate });
-                return true;
+                return "success";
             }
-            else
-            {
-                return false;
-            }
+            else return "error-havecar";
         }
 
         public async Task<ActionResult<Car>> Edit(int id, string brand, string model, string carBody, int yearOfProd, string driveType, string countryOfProd, string typeOfEngine, double engineV, string typeOfGearbox, int milleage, double dayPrice, double weekPrice, IFormFile sourceImage)

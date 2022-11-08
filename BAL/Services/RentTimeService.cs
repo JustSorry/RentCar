@@ -16,7 +16,7 @@ namespace BAL.Services
             _repositoryUser = reposUser;
         }
 
-        public IEnumerable<RentTime> GetAllTimes()
+        public async Task<IEnumerable<RentTime>> GetAllTimes()
         {
             return _repositoryRentTime.GetAllRentTimes();
         }

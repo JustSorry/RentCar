@@ -13,7 +13,7 @@ namespace BAL.Interfaces
         Task<Car> GetCar(int id);
         IEnumerable<Car> GetAllCars();
         bool CheckCar(string req, Car car);
-        bool RentCar(DateTime rentStartDate, DateTime rentEndDate, Car car, User user);
+        Task<string> RentCar(DateTime rentStartDate, DateTime rentEndDate, Car car, User user);
         void Update(Car car);
     }
 }
