@@ -51,6 +51,7 @@ namespace BAL.Services
 
         public async Task<string> RentCar(DateTime rentStartDate, DateTime rentEndDate, Car car, User user)
         {
+            if (rentEndDate == new DateTime(0001, 01, 01, 00, 00, 00)) { return "error-end-date-uncorrect"; }
             if (user.RentTime.Count == 0) 
             {
                 _rentTimeList = await _rentTimeService.GetAllTimes();

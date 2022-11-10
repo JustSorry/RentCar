@@ -21,9 +21,9 @@ public class EditCarModel : PageModel
         _carService = carService;
     }
 
-    public async void OnGet(int id)
+    public async Task OnGet(int id)
     {
-        editCar = await _carService.GetCar(id);
+        editCar =await _carService.GetCar(id);
     }
 
     public async Task<IActionResult> OnPostAsync(int id, bool delBtnPushed, bool editBtnPushed)

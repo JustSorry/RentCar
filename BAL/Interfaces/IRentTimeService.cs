@@ -13,5 +13,6 @@ namespace BAL.Interfaces
         Task<RentTime> GetRentingTime(string userId);
         Task DeleteRentCar(RentTime rentTime, User user);
         Task Update(RentTime rentTime);
+        Task CheckRentTimes(IEnumerable<RentTime> allRT);
     }
 }

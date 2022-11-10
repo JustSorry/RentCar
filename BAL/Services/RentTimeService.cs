@@ -1,7 +1,6 @@
 ﻿using BAL.Interfaces;
-using DAL.Models;
 using DAL.Contracts;
-using DAL.Repositories;
+using DAL.Models;
 
 namespace BAL.Services
 {
@@ -35,6 +34,17 @@ namespace BAL.Services
         {
             user.RentTime = null;
             await _repositoryUser.Update(user);
+        }
+
+        public async Task CheckRentTimes(IEnumerable<RentTime> allRT)
+        {
+            foreach(var time in allRT)
+            {
+                if (time.RentEndTime < DateTime.Now)
+                {
+                    await DeleteRentCar(time, await _repositoryUser.GetUser(time.UserId));
+                }
+            }
         }
     }
 }

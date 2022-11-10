@@ -27,9 +27,15 @@ namespace RentCar.Pages
         {
             if(rentBtnPushed)
             {
-                actualUser = await _userService.GetUser(User.Claims.First().Value);
+                
                 takedCar = await _carService.GetCar(carId);
-                Response.Redirect($"/ChooseRentDate?currentUserId={actualUser.Id}&takedCarId={takedCar.Id}");
+                if (User.Identity.IsAuthenticated)
+                {
+                    actualUser = await _userService.GetUser(User.Claims.First().Value);
+                    Response.Redirect($"/ChooseRentDate?currentUserId={actualUser.Id}&takedCarId={takedCar.Id}");
+                }
+                else Response.Redirect("/Accounts/Sign-in");
+                
             }
             
         }

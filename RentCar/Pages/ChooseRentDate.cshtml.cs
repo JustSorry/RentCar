@@ -1,8 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using DAL.Models;
 using BAL.Interfaces;
-using BAL.Services;
+using DAL.Models;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RentCar.Pages;
 public class ChooseRentDateModel : PageModel
@@ -26,15 +24,20 @@ public class ChooseRentDateModel : PageModel
         allTimes = await _rentTimeService.GetAllTimes();
         currentUser = await _userService.GetUser(currentUserId);
         takedCar = await _carService.GetCar(takedCarId);
+        
     }
 
     public async Task OnPostAsync(DateTime rentStartDate, DateTime rentEndDate, string currentUserId, int takedCarId)
     {
+        
         allTimes = await _rentTimeService.GetAllTimes();
         takedCar = await _carService.GetCar(takedCarId);
         currentUser = await _userService.GetUser(currentUserId);
         switch (await _carService.RentCar(rentStartDate, rentEndDate, takedCar, currentUser))
         {
+            case "error-end-date-uncorrect":
+                Response.Redirect("/Error?error=error-end-date-uncorrect");
+                break;
             case "success":
                 await _userService.Update(currentUser);
                 Response.Redirect("/Index");
