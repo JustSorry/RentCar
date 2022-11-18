@@ -1,11 +1,8 @@
+using BAL.Interfaces;
+using DAL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Authentication;
-using DAL.Models;
-using BAL.Interfaces;
-using BAL.Services;
-using Microsoft.AspNetCore.Authorization;
 
 namespace RentCar.Pages.Moderator
 {

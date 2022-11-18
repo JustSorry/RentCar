@@ -18,6 +18,9 @@ namespace RentCar.Pages
                 case "error-end-date-uncorrect":
                     errorText = "Date of the end of rent time is uncorrect. Try again.";
                     break;
+                case "com-is-empty":
+                    errorText = "Your compare has not at least one car. Add some cars to compare them.";
+                    break;
             }
         }
     }

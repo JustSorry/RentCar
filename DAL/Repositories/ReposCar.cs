@@ -1,8 +1,6 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using DAL.Contracts;
 using DAL.Data;
 using DAL.Models;
-using DAL.Contracts;
 
 namespace DAL.Repositories
 {
@@ -35,7 +33,7 @@ namespace DAL.Repositories
             return false;
         }
 
-		public async Task<Car> GetCar(int id)
+		public async Task<Car> GetCar(int? id)
 		{
 			return await db.Cars.FindAsync(id);
 		}

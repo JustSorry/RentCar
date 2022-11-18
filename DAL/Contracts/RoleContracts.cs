@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DAL.Contracts
+﻿namespace DAL.Contracts
 {
-	public interface IReposRole
+    public interface IReposRole
 	{
         Task Create(string[] roles);
     }

@@ -1,18 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DAL.Contracts;
 using DAL.Models;
-using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using DAL.Contracts;
+using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace DAL.Repositories
 {
-	public class ReposUser : IReposUser
+    public class ReposUser : IReposUser
 	{
         private SignInManager<User> _signInManager;
 		private UserManager<User> _userManager;

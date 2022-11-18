@@ -1,7 +1,6 @@
 ﻿using BAL.Interfaces;
 using DAL.Contracts;
 using DAL.Models;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 
 namespace BAL.Services
@@ -68,7 +67,7 @@ namespace BAL.Services
                         }
                     }
                 }
-                user.RentTime.Add(new RentTime { UserId = user.Id, User = user, Car = car, CarId = car.Id, RentStartTime = rentStartDate, RentEndTime = rentEndDate });
+                user.RentTime.Add(new RentTime { UserId = user.Id, CarId = car.Id, RentStartTime = rentStartDate, RentEndTime = rentEndDate });
                 return "success";
             }
             else return "error-havecar";
@@ -101,7 +100,7 @@ namespace BAL.Services
             _repositoryCar.Delete(car);
         }
 
-        public async Task<Car> GetCar(int id)
+        public async Task<Car> GetCar(int? id)
         {
             return await _repositoryCar.GetCar(id);
         }

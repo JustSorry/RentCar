@@ -1,7 +1,5 @@
 using BAL.Interfaces;
 using DAL.Models;
-using Microsoft.AspNetCore.Http.Extensions;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RentCar.Pages.Accounts

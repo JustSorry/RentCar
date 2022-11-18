@@ -1,6 +1,4 @@
 using BAL.Interfaces;
-using DAL.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
