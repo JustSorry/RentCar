@@ -8,6 +8,7 @@ namespace DAL.Data
     {
         public DbSet<Compare> Compare { get; set; }
         public DbSet<RentTime> RentTime { get; set; }
+		public DbSet<RentArchive> RentArchive { get; set; }
         public DbSet<Car> Cars { get; set; } = null!;
         public ApplicationContext()
         {

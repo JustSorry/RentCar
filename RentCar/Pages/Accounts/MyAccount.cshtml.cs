@@ -7,16 +7,19 @@ namespace RentCar.Pages
     public class MyAccountModel : PageModel
     {
         private readonly IUserService _userService;
-        public MyAccountModel(IUserService userService) 
+        private readonly IRentTimeService _timeService;
+        public MyAccountModel(IUserService userService, IRentTimeService timeService) 
         {
             _userService = userService;
+            _timeService = timeService;
         }
             
         public User? CurrentUser { get; set; }
 
-        public async Task OnGet(string? Nickname)
+        public async Task OnGet(string Nickname)
         {
-            CurrentUser =await _userService.GetUser(Nickname);
+			await _timeService.CheckRentTimes(await _timeService.GetAllTimes());
+            CurrentUser = await _userService.GetUser(Nickname);
         }
     }
 }

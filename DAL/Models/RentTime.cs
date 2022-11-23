@@ -6,7 +6,6 @@ namespace DAL.Models
 	{
         [Key]
         public string UserId { get; set; }
-
         public int CarId { get; set; }
 		
         public DateTime RentStartTime { get; set; }

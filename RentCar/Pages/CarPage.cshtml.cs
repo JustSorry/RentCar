@@ -25,14 +25,14 @@ namespace RentCar.Pages
             takedCar =await _carService.GetCar(Id);
         }
 
-        public async Task<IActionResult> OnPost(int carId, bool rentBtnPushed, bool compareBtnPushed)
+        public async Task OnPost(int carId, bool rentBtnPushed, bool compareBtnPushed)
         {
             takedCar = await _carService.GetCar(carId);
             actualUser = await _userService.GetUser(User.Claims.First().Value);
             if (rentBtnPushed)
             {
-                if (User.Identity.IsAuthenticated) {return RedirectToPage($"/ChooseRentDate?currentUserId={actualUser.Id}&takedCarId={takedCar.Id}");}
-                else return RedirectToPage("/Accounts/Sign-in");
+                if (User.Identity.IsAuthenticated) {Response.Redirect($"/ChooseRentDate?currentUserId={actualUser.Id}&takedCarId={takedCar.Id}");}
+                else Response.Redirect("/Accounts/Sign-in");
             }
             if(compareBtnPushed)
             {
@@ -42,11 +42,10 @@ namespace RentCar.Pages
                     //await _compareService.Update(actualUser.UserCompare);
                     //await _userService.Update(actualUser);
 					//return RedirectToPage($"/Accounts/CarsCompare?UserId={actualUser.Id}"); 
-					return RedirectToPage("/Index"); 
+					Response.Redirect("/Index"); 
                 }
-                else { return RedirectToPage($"/Error?error={res}"); }
+                else { Response.Redirect($"/Error?error={res}"); }
             }
-            return null;
         }
     }
 }

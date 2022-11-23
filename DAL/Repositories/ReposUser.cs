@@ -35,7 +35,7 @@ namespace DAL.Repositories
 
         public async Task<User> GetUser(string id)
         {
-            return _userManager.Users.Include(user => user.RentingCars).Include(user => user.RentTime).First(user=>user.Id == id);
+            return _userManager.Users.Include(user => user.RentingCars).Include(user => user.RentTime).Include(user => user.UserCompare).First(user=>user.Id == id);
         }
        
         public IEnumerable<User> GetAll()

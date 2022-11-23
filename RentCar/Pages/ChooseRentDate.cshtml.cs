@@ -8,15 +8,17 @@ public class ChooseRentDateModel : PageModel
     private readonly ICarService _carService;
     private readonly IUserService _userService;
     private readonly IRentTimeService _rentTimeService;
+    private readonly IRentArchiveService _archiveService;
     public IEnumerable<RentTime> allTimes;
     public Car takedCar;
     public User currentUser;
 
-    public ChooseRentDateModel(ICarService carService, IUserService userService, IRentTimeService rentTimeService)
+    public ChooseRentDateModel(ICarService carService, IUserService userService, IRentTimeService rentTimeService, IRentArchiveService archiveService)
     {
         _carService = carService;
         _userService = userService;
         _rentTimeService = rentTimeService;
+        _archiveService = archiveService;
     }
 
     public async Task OnGet(string currentUserId, int takedCarId)
@@ -29,8 +31,6 @@ public class ChooseRentDateModel : PageModel
 
     public async Task OnPostAsync(DateTime rentStartDate, DateTime rentEndDate, string currentUserId, int takedCarId)
     {
-        
-        allTimes = await _rentTimeService.GetAllTimes();
         takedCar = await _carService.GetCar(takedCarId);
         currentUser = await _userService.GetUser(currentUserId);
         switch (await _carService.RentCar(rentStartDate, rentEndDate, takedCar, currentUser))
@@ -49,6 +49,7 @@ public class ChooseRentDateModel : PageModel
                 Response.Redirect("/Error?error=error-car-unavb");
                 break;
         }
+        await _archiveService.Add(new RentTime { UserId = currentUser.Id, CarId = takedCar.Id, RentEndTime = rentEndDate, RentStartTime = rentEndDate });
     }
 }
 

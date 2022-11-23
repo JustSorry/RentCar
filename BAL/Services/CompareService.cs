@@ -36,29 +36,17 @@ namespace BAL.Services
             }
         }
 
-        public async Task<string> DeleteFromCompare(User user, Car car)
+        public async Task DeleteFromCompare(User user, Car car)
         {
-			if (user.UserCompare.CompareCar1ID == null & user.UserCompare.CompareCar2ID == null) { return "com-is-empty";}
-            else
-            {
-                if(user.UserCompare.CompareCar1ID == car.Id) 
-                {
-                    user.UserCompare.CompareCar1ID = null;
-                }
-                if(user.UserCompare.CompareCar2ID == car.Id) 
-                {
-                    user.UserCompare.CompareCar2ID = null; 
-                }
-                await _reposUser.Update(user);
-                return "success";
-            }
+            if(user.UserCompare.CompareCar1ID == car.Id) {user.UserCompare.CompareCar1ID = null; }
+            if(user.UserCompare.CompareCar2ID == car.Id) {user.UserCompare.CompareCar2ID = null; }
+            await _reposUser.Update(user);   
         }
 
         public async Task DeleteCompare(User user)
         {
-            user.UserCompare = null;
-            await _reposCompare.DeleteCompare(user.UserCompare);
-            await _reposUser.Update(user);
+			await _reposCompare.DeleteCompare(user.UserCompare);
+			await _reposUser.Update(user);		
         }
 
         public IEnumerable<Compare> GetAll()

@@ -30,19 +30,24 @@ namespace BAL.Services
             await _repositoryRentTime.Update(rentTime);
         }
         
-        public async Task DeleteRentCar(RentTime rentTime, User user)
+        public async Task DeleteRentCar(User user)
         {
             user.RentTime = null;
             await _repositoryUser.Update(user);
         }
 
+        public async Task Edit(RentTime rentTime, User user)
+        {
+            // coming s00n
+        }
+
         public async Task CheckRentTimes(IEnumerable<RentTime> allRT)
         {
-            foreach(var time in allRT)
+            foreach (var time in allRT)
             {
                 if (time.RentEndTime < DateTime.Now)
                 {
-                    await DeleteRentCar(time, await _repositoryUser.GetUser(time.UserId));
+                    await DeleteRentCar(await _repositoryUser.GetUser(time.UserId));
                 }
             }
         }

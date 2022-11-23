@@ -21,7 +21,10 @@ namespace RentCar.Pages
                 case "com-is-empty":
                     errorText = "Your compare has not at least one car. Add some cars to compare them.";
                     break;
-            }
+                case "havent-rent-cars":
+                    errorText = "You are haven't any cars";
+                    break;
+			}
         }
     }
 }

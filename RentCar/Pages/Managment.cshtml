@@ -7,15 +7,17 @@
 <div class="managment">
 	<ul class="manage-operations">
 		<li>
-			<a class="delete-car-ref" href="/Admin/CarMng">Cars managment</a>
+			<a href="/Admin/CarMng">Cars managment</a>
 		</li>
 		<li>
-			@if (User.IsInRole("moderator"))
-			{
-				<a class="give-role-button" href="/Moderator/GiveRole">Users managment</a>
-
-				<br />
-			}
+			<a href="/Admin/ArchiveMng">Archive managment</a>
 		</li>
+		@if (User.IsInRole("moderator"))
+		{
+			<li>
+				<a class="give-role-button" href="/Moderator/GiveRole">Users managment</a>
+				<br />
+			</li>
+		}
 	</ul>
 </div>

@@ -25,22 +25,18 @@ namespace RentCar.Pages.Accounts
             UserRent = await _timeService.GetRentingTime(UserId);                                                   
             if (UserRent != null)
             {
-                if (DateTime.Now > UserRent.RentEndTime) 
-                {
-                    await _timeService.DeleteRentCar(UserRent, currentUser);
-                    Response.Redirect($"/Accounts/RentingCars?UserId={UserId}");
-                }
-                rentingCar = await _carService.GetCar(UserRent.CarId);
-            }
-        }
+				rentingCar = await _carService.GetCar(UserRent.CarId);
+                
+			}
+			if (rentingCar == null) { Response.Redirect("/Error?error=havent-rent-cars"); }
+		}
 
         public async Task OnPost(bool deleteRent)
         {
             currentUser = await _userService.GetUser(User.Claims.First().Value);
-            UserRent = await _timeService.GetRentingTime(currentUser.Id);
             if (deleteRent)
             {
-                await _timeService.DeleteRentCar(UserRent, currentUser);
+                await _timeService.DeleteRentCar(currentUser);
             }
             RedirectToPage("/Catalog");
         }

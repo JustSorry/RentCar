@@ -28,7 +28,8 @@ namespace DAL.Repositories
 
         public async Task DeleteCompare(Compare compare)
         {
-            db.Remove(compare);
+            compare.CompareCar1ID = null;
+            compare.CompareCar2ID= null;
             await db.SaveChangesAsync();
         }
 
