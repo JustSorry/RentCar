@@ -1,0 +1,50 @@
+﻿@page
+@using System.Globalization
+@model RentCar.Pages.ChooseRentDateModel
+@{
+    ViewData["Title"] = "Edit rent time";
+    bool hasRows = false;
+    string datestrPlusDay = DateTime.Today.AddDays(1).ToShortDateString();
+    string datestrPlusMonth = DateTime.Today.AddMonths(1).ToShortDateString();
+
+    string formatsrc  = "dd.MM.yyyy";
+    string formatdst  = "yyyy-MM-dd";
+    DateTime plusDay = DateTime.ParseExact(datestrPlusDay, formatsrc, CultureInfo.InvariantCulture);
+    DateTime plusMonth = DateTime.ParseExact(datestrPlusMonth, formatsrc, CultureInfo.InvariantCulture);
+}
+
+<div class="choose-rent">
+	<form method="post">
+        <h1 class="center">@Model.takedCar.Brand @Model.takedCar.Model @Model.takedCar.YearOfProd</h1>
+        <input name="userId" value="@Model.currentUser.Id" hidden/>
+        <input name="carId" value="@Model.takedCar.Id" hidden/>
+        <p class="center">
+            <label class="center" for="date">New rent end date: </label>
+            <input type="date" name="rentEndDate" min="@plusDay.ToString(formatdst)" max="@plusMonth.ToString(formatdst)" />
+        </p>
+        <hr />
+        <h2 class="table">Actual rents for this car:</h2>
+        <table class="table">
+            <tr>
+                <th><p class="table"><strong>Car</strong></p></th>
+                <th><p class="table"><strong>Rent start date</strong></p></th>
+                <th><p class="table"><strong>Rent end date</strong></p></th>
+            </tr>
+            @foreach (var time in Model.allTimes)
+            {
+                if (Model.takedCar.Id == time.CarId)
+                {
+                    <tr>
+                        <td class="table">@Model.takedCar.Brand @Model.takedCar.Model</td>
+                        <td class="table">@time.RentStartTime.ToShortDateString()</td>
+                        <td class="table">@time.RentEndTime.ToShortDateString()</td>
+                    </tr>
+                    hasRows = true;
+                }
+            }
+        </table>
+        @if (!hasRows) {<h2 class="center">This car is full available for you!</h2>}
+        <hr />
+        <button class="floating-button" type="submit">Rent car</button>
+	</form>
+</div>

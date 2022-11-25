@@ -22,13 +22,25 @@ public class ArchiveService : IRentArchiveService
 
 	public IEnumerable<RentArchive> GetUserHistory(string userId)
 	{
-		IEnumerable<RentArchive> archive = _reposArchive.GetArchive();
 		List<RentArchive> userHistory= new List<RentArchive>();
-		foreach(var note in archive) 
+		foreach(var note in _reposArchive.GetArchive())
 		{
 			if (note.UserId == userId) {userHistory.Add(note);}
 		}
 		return userHistory;
+	}
+
+	public async Task Extend(int archiveItemId, DateTime newEndDate)
+	{
+		foreach(var item in _reposArchive.GetArchive())
+		{
+			if(item.Id == archiveItemId)
+			{
+				item.RentEndDate = newEndDate;
+				_reposArchive.Update(item);
+			}
+		}
+		
 	}
 }
 

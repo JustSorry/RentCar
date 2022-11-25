@@ -7,5 +7,6 @@ namespace BAL.Interfaces
 		Task Add(RentTime rt);
 		IEnumerable<RentArchive> GetArchive();
 		IEnumerable<RentArchive> GetUserHistory(string userId);
+		Task Extend(int archiveItemId, DateTime newEndDate);
 	}
 }

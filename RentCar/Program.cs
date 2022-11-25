@@ -28,12 +28,14 @@ builder.Services.AddAuthorization(options =>
         policy => policy.RequireRole("moderator"));
 });
 
+builder.Services.AddTransient<IRentArchiveService, ArchiveService>();
 builder.Services.AddTransient<ICompareService, CompareService>();
 builder.Services.AddTransient<IRoleService, RoleService>();
 builder.Services.AddTransient<IRentTimeService, RentTimeService>();
 builder.Services.AddTransient<ICarService, CarService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IReposRentTime, ReposRentTime>();
+builder.Services.AddTransient<IReposRentArchive, ReposRentArchive>();
 builder.Services.AddTransient<IReposCompare, ReposCompare>();
 builder.Services.AddTransient<IReposRole, ReposRole>();
 builder.Services.AddTransient<IReposCar, ReposCar>();

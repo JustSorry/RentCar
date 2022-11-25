@@ -31,7 +31,8 @@ public class ChooseRentDateModel : PageModel
 
     public async Task OnPostAsync(DateTime rentStartDate, DateTime rentEndDate, string currentUserId, int takedCarId)
     {
-        takedCar = await _carService.GetCar(takedCarId);
+		allTimes = await _rentTimeService.GetAllTimes();
+		takedCar = await _carService.GetCar(takedCarId);
         currentUser = await _userService.GetUser(currentUserId);
         switch (await _carService.RentCar(rentStartDate, rentEndDate, takedCar, currentUser))
         {
@@ -49,7 +50,7 @@ public class ChooseRentDateModel : PageModel
                 Response.Redirect("/Error?error=error-car-unavb");
                 break;
         }
-        await _archiveService.Add(new RentTime { UserId = currentUser.Id, CarId = takedCar.Id, RentEndTime = rentEndDate, RentStartTime = rentEndDate });
+        
     }
 }
 

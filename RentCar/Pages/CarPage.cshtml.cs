@@ -1,6 +1,5 @@
 using BAL.Interfaces;
 using DAL.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RentCar.Pages
@@ -42,7 +41,7 @@ namespace RentCar.Pages
                     //await _compareService.Update(actualUser.UserCompare);
                     //await _userService.Update(actualUser);
 					//return RedirectToPage($"/Accounts/CarsCompare?UserId={actualUser.Id}"); 
-					Response.Redirect("/Index"); 
+					Page(); 
                 }
                 else { Response.Redirect($"/Error?error={res}"); }
             }

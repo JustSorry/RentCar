@@ -1,4 +1,42 @@
 ﻿@page
 @model RentCar.Pages.Admin.ArchiveMngModel
 @{
+	ViewData["Title"] = "Rent archive";
 }
+
+
+<body>
+	<table class="actual-rent-table">
+		<tr class="table-headers">
+@*			<th>
+				<p><strong>User</strong></p>
+			</th>*@
+			<th>
+				<p><strong>Car</strong></p>
+			</th>
+			<th class="borders">
+				<p><strong>Rent start date</strong></p>
+			</th>
+			<th class="borders">
+				<p><strong>Rent end date</strong></p>
+			</th>
+		</tr>
+		@foreach (var car in Model.fullArchive)
+		{
+			<tr>
+				@*<td>
+					<p>@car.Key.UserId</p>
+				</td>*@
+				<td>
+					<a href="/CarPage?Id=@car.Value.Id">@car.Value.Brand @car.Value.Model @car.Value.YearOfProd</a>
+				</td>
+				<td class="borders">
+					<p>@car.Key.RentStartDate</p>
+				</td>
+				<td class="borders">
+					<p>@car.Key.RentEndDate</p>
+				</td>
+			</tr>
+		}
+	</table>
+</body>

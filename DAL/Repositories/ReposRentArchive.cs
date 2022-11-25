@@ -17,4 +17,9 @@ public class ReposRentArchive : IReposRentArchive
 		List<RentArchive>archive = db.RentArchive.ToList();
 		return archive;
 	}
+
+	public void Update(RentArchive ra)
+	{
+		db.RentArchive.Update(ra);
+	}
 }

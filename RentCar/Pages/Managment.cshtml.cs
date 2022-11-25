@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace RentCar.Pages
+namespace RentCar.Pages;
+public class ManagmentModel : PageModel
 {
-    public class ManagmentModel : PageModel
-    {
-    }
 }

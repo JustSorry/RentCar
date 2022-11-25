@@ -18,17 +18,17 @@
 				<p><strong>Rent end date</strong></p>
 			</th>
 		</tr>
-		@foreach(var rt in Model.userHistory)
+		@foreach (var car in Model.fullUserHistory)
 		{
 			<tr>
 				<td>
-					<a href="/CarPage?Id=@rt.CarId">Click here. Name coming s00n</a>
+					<a href="/CarPage?Id=@car.Value.Id">@car.Value.Brand @car.Value.Model @car.Value.YearOfProd</a>
 				</td>
 				<td class="borders">
-					<p>@rt.RentStartDate</p>
+					<p>@car.Key.RentStartDate</p>
 				</td>
 				<td class="borders">
-					<p>@rt.RentEndDate</p>
+					<p>@car.Key.RentEndDate</p>
 				</td>
 			</tr>
 		}

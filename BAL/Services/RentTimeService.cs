@@ -8,11 +8,13 @@ namespace BAL.Services
 	{
         public readonly IReposRentTime _repositoryRentTime;
         public readonly IReposUser _repositoryUser;
+        public readonly IRentArchiveService _archiveService;
         
-        public RentTimeService(IReposRentTime reposRentTime, IReposUser reposUser)
+        public RentTimeService(IReposRentTime reposRentTime, IReposUser reposUser, IRentArchiveService archiveService)
         {
             _repositoryRentTime = reposRentTime;
             _repositoryUser = reposUser;
+            _archiveService = archiveService;
         }
 
         public async Task<IEnumerable<RentTime>> GetAllTimes()
@@ -36,9 +38,10 @@ namespace BAL.Services
             await _repositoryUser.Update(user);
         }
 
-        public async Task Edit(RentTime rentTime, User user)
+        public async Task Extend(User user, DateTime newEndDate)
         {
-            // coming s00n
+            user.RentTime.First().RentEndTime = newEndDate;
+            await _repositoryUser.Update(user);
         }
 
         public async Task CheckRentTimes(IEnumerable<RentTime> allRT)
@@ -47,8 +50,9 @@ namespace BAL.Services
             {
                 if (time.RentEndTime < DateTime.Now)
                 {
-                    await DeleteRentCar(await _repositoryUser.GetUser(time.UserId));
-                }
+					await _archiveService.Add(new RentTime { UserId = time.UserId, CarId = time.CarId, RentEndTime = time.RentEndTime, RentStartTime = time.RentStartTime });
+					await DeleteRentCar(await _repositoryUser.GetUser(time.UserId));
+				}
             }
         }
     }

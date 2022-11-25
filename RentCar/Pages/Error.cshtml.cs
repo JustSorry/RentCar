@@ -24,6 +24,9 @@ namespace RentCar.Pages
                 case "havent-rent-cars":
                     errorText = "You are haven't any cars";
                     break;
+				case "user-history-is-empty":
+					errorText = "Your rent history is empty";
+					break;
 			}
         }
     }

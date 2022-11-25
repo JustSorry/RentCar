@@ -31,14 +31,14 @@ namespace RentCar.Pages.Accounts
 			if (rentingCar == null) { Response.Redirect("/Error?error=havent-rent-cars"); }
 		}
 
-        public async Task OnPost(bool deleteRent)
+        public async Task OnPost(bool deleteRentBtnPushed, bool extendRentBtnPushed)
         {
             currentUser = await _userService.GetUser(User.Claims.First().Value);
-            if (deleteRent)
+            if (deleteRentBtnPushed)
             {
                 await _timeService.DeleteRentCar(currentUser);
             }
-            RedirectToPage("/Catalog");
+            Response.Redirect("/Index");
         }
     }
 }
