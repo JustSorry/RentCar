@@ -6,9 +6,9 @@ namespace DAL.Repositories;
 public class ReposRentArchive : IReposRentArchive
 {
 	ApplicationContext db = new ApplicationContext();
-	public async Task Add(RentTime rt)
+	public async Task Add(RentArchive ra)
 	{
-		db.RentArchive.Add(new RentArchive { CarId = rt.CarId, UserId = rt.UserId, RentStartDate = rt.RentStartTime, RentEndDate = rt.RentEndTime });
+		db.RentArchive.Add(ra);
 		db.SaveChanges();
 	}
 
@@ -18,8 +18,9 @@ public class ReposRentArchive : IReposRentArchive
 		return archive;
 	}
 
-	public void Update(RentArchive ra)
+	public async Task Update(RentArchive ra)
 	{
 		db.RentArchive.Update(ra);
+		await db.SaveChangesAsync();
 	}
 }

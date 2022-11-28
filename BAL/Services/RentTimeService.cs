@@ -34,7 +34,8 @@ namespace BAL.Services
         
         public async Task DeleteRentCar(User user)
         {
-            user.RentTime = null;
+            await _archiveService.EditEndTimeAfterDelete(user.RentTime.First());
+			user.RentTime = null;
             await _repositoryUser.Update(user);
         }
 
@@ -42,6 +43,7 @@ namespace BAL.Services
         {
             user.RentTime.First().RentEndTime = newEndDate;
             await _repositoryUser.Update(user);
+            await _archiveService.Extend(user.Id, newEndDate);
         }
 
         public async Task CheckRentTimes(IEnumerable<RentTime> allRT)
@@ -50,8 +52,21 @@ namespace BAL.Services
             {
                 if (time.RentEndTime < DateTime.Now)
                 {
-					await _archiveService.Add(new RentTime { UserId = time.UserId, CarId = time.CarId, RentEndTime = time.RentEndTime, RentStartTime = time.RentStartTime });
 					await DeleteRentCar(await _repositoryUser.GetUser(time.UserId));
+				}
+            }
+            List<RentArchive> allRA = _archiveService.GetArchive().ToList();
+            foreach (var archiveItem in allRA) 
+            {
+                if(archiveItem.RentStatus != "ended")
+                {
+					if (archiveItem.RentStartDate <= DateTime.Today && archiveItem.RentEndDate >= DateTime.Today)
+					{
+						archiveItem.RentStatus = "active";
+					}
+					else if (archiveItem.RentEndDate < DateTime.Today) { archiveItem.RentStatus = "ended"; }
+					else archiveItem.RentStatus = "non-active";
+					await _archiveService.Update(archiveItem);
 				}
             }
         }

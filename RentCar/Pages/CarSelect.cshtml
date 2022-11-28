@@ -6,16 +6,23 @@
 
 <h2 >Car select page </h2>
 <ul class="res-pan">
-	@foreach (var car in Model.ResCars)
-	{
-		<li>
-			<div class="res-car">
-				<a href="/CarPage?Id=@car.Id"> <img class="car-img" src="@car.ImgPath" alt="image coming s00n"/> </a>
-				<div class="car-title">
-					<a class="car-title" href="/CarPage?Id=@car.Id"><strong>@car.Brand @car.Model @car.YearOfProd</strong></a><br>
+	<form method="post">
+		<div class="container">
+			@foreach (var car in Model.ResCars)
+			{
+				<div class="car-card">
+					<div class="icon">
+						<a href="/CarPage?Id=@car.Id"><img class="car-img" src="@car.ImgPath" alt="image coming s00n" /></a>
+						<p class="car-title">@car.Brand @car.Model @car.YearOfProd</p>
+					</div>
+					<div class="icon back">
+						<a id="i" aria-hidden="true" href="/CarPage?Id=@car.Id"><strong>@car.Brand @car.Model @car.YearOfProd</strong> </a>
+						<img class="car-img" src="@car.ImgPath" height="30" width="60" alt="image coming s00n" />
+						<p class="prices">Actual prices: <br />For a day - $@car.DayPrice <br />For a week - $@car.WeekPrice</p>
+						<button type="submit" class="floating-button" name="carId" value="@car.Id">More info</button>
+					</div>
 				</div>
-			</div>
-		</li>
-
-	}
+			}
+		</div>
+	</form>
 </ul>

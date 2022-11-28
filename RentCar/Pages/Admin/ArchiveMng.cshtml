@@ -8,25 +8,18 @@
 <body>
 	<table class="actual-rent-table">
 		<tr class="table-headers">
-@*			<th>
-				<p><strong>User</strong></p>
-			</th>*@
-			<th>
-				<p><strong>Car</strong></p>
-			</th>
-			<th class="borders">
-				<p><strong>Rent start date</strong></p>
-			</th>
-			<th class="borders">
-				<p><strong>Rent end date</strong></p>
-			</th>
+			<th><p><strong>User</strong></p></th>
+			<th><p><strong>Car</strong></p></th>
+			<th><p><strong>Rent start date</strong></p></th>
+			<th><p><strong>Rent end date</strong></p></th>
+			<th><p><strong>Status</strong></p></th>
 		</tr>
 		@foreach (var car in Model.fullArchive)
 		{
 			<tr>
-				@*<td>
-					<p>@car.Key.UserId</p>
-				</td>*@
+				<td>
+					<p>@car.Key.Username</p>
+				</td>
 				<td>
 					<a href="/CarPage?Id=@car.Value.Id">@car.Value.Brand @car.Value.Model @car.Value.YearOfProd</a>
 				</td>
@@ -35,6 +28,9 @@
 				</td>
 				<td class="borders">
 					<p>@car.Key.RentEndDate</p>
+				</td>
+				<td>
+					<p>@car.Key.RentStatus</p>
 				</td>
 			</tr>
 		}

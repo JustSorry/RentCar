@@ -1,5 +1,6 @@
 using BAL.Interfaces;
 using DAL.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RentCar.Pages
@@ -20,6 +21,11 @@ namespace RentCar.Pages
             Request = req;
             Car[] carArray = _carService.GetAllCars().ToArray();
             ResCars = (from car in carArray where _carService.CheckCar(Request ?? "", car) select car).ToArray();
+        }
+
+        public IActionResult OnPost(int carId) 
+        {
+            return RedirectToPage($"/CarPage?Id={carId}");
         }
     }
 }

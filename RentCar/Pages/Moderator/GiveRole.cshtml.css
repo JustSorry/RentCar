@@ -1,9 +1,11 @@
 ﻿button.remove-admin-button{
     background-color: red;
+    cursor: pointer;
 }
 
 button.give-admin-button{
     background-color: green;
+    cursor: pointer;
 }
 
 div.users-form{

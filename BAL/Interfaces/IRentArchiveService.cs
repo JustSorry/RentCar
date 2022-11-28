@@ -4,9 +4,12 @@ namespace BAL.Interfaces
 {
 	public interface IRentArchiveService
 	{
-		Task Add(RentTime rt);
+		Task Add(RentArchive rt);
 		IEnumerable<RentArchive> GetArchive();
 		IEnumerable<RentArchive> GetUserHistory(string userId);
-		Task Extend(int archiveItemId, DateTime newEndDate);
+		Task Extend(string UserId, DateTime newEndDate);
+		Task Update(RentArchive ra);
+		Task EditEndTimeAfterDelete(RentTime rt);
+
 	}
 }

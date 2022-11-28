@@ -1,6 +1,5 @@
 html {
     font-size: 14px;
-    /*background-color: #424242;*/
     position: relative;
     min-height: 100%;
     background-image: url("../Images/testbg3.jpg")
@@ -55,16 +54,16 @@ div.actual-date{
     font-family:Calibri;
 }
 
-header{
+header {
     background-color: gray;
     border-style: solid;
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
+    @media (min-width: 768px) {
+        html {
+            font-size: 16px;
+        }
+    }
 
-body {
+    body {
   margin-bottom: 60px;
 }

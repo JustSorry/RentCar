@@ -3,7 +3,7 @@
 namespace DAL.Contracts;
 public interface IReposRentArchive
 {
-	Task Add(RentTime rt);
+	Task Add(RentArchive ra);
 	IEnumerable<RentArchive> GetArchive();
-	void Update(RentArchive ra);
+	Task Update(RentArchive ra);
 }

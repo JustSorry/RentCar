@@ -7,14 +7,16 @@ namespace BAL.Services
 {
     public class CarService : ICarService
 	{
+        private readonly IRentArchiveService _archiveService;
         private IReposCar _repositoryCar;
         private IRentTimeService _rentTimeService;
         private IEnumerable<RentTime> _rentTimeList;
 
-        public CarService(IReposCar repositoryCar, IRentTimeService rentTimeService)
+        public CarService(IReposCar repositoryCar, IRentTimeService rentTimeService, IRentArchiveService archiveService)
         {
             _repositoryCar = repositoryCar;
             _rentTimeService = rentTimeService;
+            _archiveService = archiveService;
         }
 
         public async Task<ActionResult<Car>> NewCar(string brand, string model, string carBody, int yearOfProd, string driveType, string countryOfProd, string typeOfEngine, double engineV, string typeOfGearbox, int milleage, double dayPrice, double weekPrice, IFormFile sourceImage)
@@ -68,7 +70,8 @@ namespace BAL.Services
                     }
                 }
                 user.RentTime.Add(new RentTime { UserId = user.Id, CarId = car.Id, RentStartTime = rentStartDate, RentEndTime = rentEndDate });
-                return "success";
+				await _archiveService.Add(new RentArchive { UserId = user.Id, Username = user.UserName, CarId = car.Id, RentEndDate = rentEndDate, RentStartDate = rentStartDate, RentStatus = rentStartDate <= DateTime.Today ? "active" : "non-active" });
+				return "success";
             }
             else return "error-havecar";
         }
