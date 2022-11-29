@@ -7,5 +7,6 @@ namespace DAL.Models
         public List<Car> RentingCars { get; set; } = new();
         public List<RentTime>? RentTime { get; set; } = new();
         public Compare? UserCompare { get; set; } = new();
+        public List<Notification> Notifications { get; set; } = new();
     }
 }

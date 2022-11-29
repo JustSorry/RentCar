@@ -9,12 +9,14 @@ namespace BAL.Services
         public readonly IReposRentTime _repositoryRentTime;
         public readonly IReposUser _repositoryUser;
         public readonly IRentArchiveService _archiveService;
+        public readonly INotificationService _noteService;
         
-        public RentTimeService(IReposRentTime reposRentTime, IReposUser reposUser, IRentArchiveService archiveService)
+        public RentTimeService(IReposRentTime reposRentTime, IReposUser reposUser, IRentArchiveService archiveService, INotificationService noteService)
         {
             _repositoryRentTime = reposRentTime;
             _repositoryUser = reposUser;
             _archiveService = archiveService;
+            _noteService = noteService;
         }
 
         public async Task<IEnumerable<RentTime>> GetAllTimes()
@@ -25,11 +27,6 @@ namespace BAL.Services
         public async Task<RentTime> GetRentingTime(string userId)
         {
             return await _repositoryRentTime.GetRentTime(userId);
-        }
-
-        public async Task Update(RentTime rentTime)
-        {
-            await _repositoryRentTime.Update(rentTime);
         }
         
         public async Task DeleteRentCar(User user)
@@ -53,10 +50,10 @@ namespace BAL.Services
                 if (time.RentEndTime < DateTime.Now)
                 {
 					await DeleteRentCar(await _repositoryUser.GetUser(time.UserId));
+                    await _noteService.Add(time.CarId, time.RentStartTime, time.UserId, "ended");
 				}
             }
-            List<RentArchive> allRA = _archiveService.GetArchive().ToList();
-            foreach (var archiveItem in allRA) 
+            foreach (var archiveItem in _archiveService.GetArchive().ToList()) 
             {
                 if(archiveItem.RentStatus != "ended")
                 {

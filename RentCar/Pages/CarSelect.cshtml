@@ -17,7 +17,7 @@
 					</div>
 					<div class="icon back">
 						<a id="i" aria-hidden="true" href="/CarPage?Id=@car.Id"><strong>@car.Brand @car.Model @car.YearOfProd</strong> </a>
-						<img class="car-img" src="@car.ImgPath" height="30" width="60" alt="image coming s00n" />
+						<a href="/CarPage?Id=@car.Id"><img class="car-img" src="@car.ImgPath" height="30" width="60" alt="image coming s00n" /></a>
 						<p class="prices">Actual prices: <br />For a day - $@car.DayPrice <br />For a week - $@car.WeekPrice</p>
 						<button type="submit" class="floating-button" name="carId" value="@car.Id">More info</button>
 					</div>

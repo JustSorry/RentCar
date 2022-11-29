@@ -1,6 +1,5 @@
 ﻿using DAL.Contracts;
 using Microsoft.AspNetCore.Identity;
-using DAL.Models;
 
 namespace DAL.Repositories
 {

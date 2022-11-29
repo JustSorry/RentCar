@@ -64,6 +64,15 @@
                             <li class="my-account">
                                 <a class="nav-link" href="/Accounts/MyAccount?nickname=@User.Claims?.First().Value">My account</a>
                             </li>
+                            @if ((User.IsInRole("admin")) || (User.IsInRole("moderator")))
+                            {
+                                <li class="managment">
+                                    <a class="nav-link" href="/Managment">Managment</a>
+                                </li>
+                            }
+                            <li>
+                                <a class="nav-link" href="/Accounts/Notifications?userId=@User.Claims?.First().Value"><img src="~/Images/notification-bell.png" width="20" height="20"/></a>
+                            </li>
                         }
                         else
                         {
@@ -72,12 +81,6 @@
                             </li>
                             <li class="reg-nav-item">
                                 <a class="nav-link" asp-page="/Accounts/Reg">Registration</a>
-                            </li>
-                        }
-                        @if ((User.IsInRole("admin")) || (User.IsInRole("moderator")))
-                        {
-                            <li class="managment">
-                                <a class="nav-link" href="/Managment">Managment</a>
                             </li>
                         }
                     </ul>

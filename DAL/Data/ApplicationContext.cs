@@ -10,6 +10,7 @@ namespace DAL.Data
         public DbSet<RentTime> RentTime { get; set; }
 		public DbSet<RentArchive> RentArchive { get; set; }
         public DbSet<Car> Cars { get; set; } = null!;
+        public DbSet<Notification> Notifications { get; set; }
         public ApplicationContext()
         {
             //Database.EnsureDeleted();

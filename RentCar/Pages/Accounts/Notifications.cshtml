@@ -1,0 +1,35 @@
+﻿@page
+@using DAL.Models;
+@model RentCar.Pages.Accounts.NotificationsModel
+@{
+	ViewData["Title"] = "Your notifications";
+}
+
+<body>
+	<div>
+		<table>
+			<tr>
+				<th><p><strong>Notification create time</strong></p></th>
+				<th><p><strong>Title</strong></p></th>
+				<th><p><strong>Description</strong></p></th>
+				<th></th>
+			</tr>
+			@foreach (Notification note in Model.allUserNotes)
+			{
+				<form method="post">
+					<tr>
+						<input name="noteId" value="@note.Id" hidden>
+						<input name="userId" value="@note.UserId" hidden>
+						<td><p>@note.CreatedDate</p></td>
+						<td><p>@note.Title</p></td>
+						<td><p>@note.Description</p></td>
+						<td><button class="floating-button" name="delOneBtnPushed" value="true"></button></td>
+					</tr>
+				</form>
+			}
+		</table>
+		<form method="post">
+			<button class = "floating-button" type="submit" name="delAllBtnPushed" falue="true">Delete all notifications</button>
+		</form>
+	</div>
+</body>
